@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-77dcbccb-aab7-4665-919b-5839e41658c6/styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&display=swap">
+<script src="_ds/organic-77dcbccb-aab7-4665-919b-5839e41658c6/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  /* Qualix Solutions theme — the Organic component layer retuned onto the brand's near-black ground. */
+  :root {
+    --color-bg: #0a0a0a;
+    --color-surface: #16171a;
+    --color-text: #f4f4f2;
+    --color-on-accent: #ffffff;
+    --color-divider: rgba(255,255,255,0.14);
+
+    --color-neutral-100: #131417;
+    --color-neutral-200: #1f2024;
+    --color-neutral-300: #2b2d32;
+    --color-neutral-400: #3b3e45;
+    --color-neutral-500: #5a5e67;
+    --color-neutral-600: #8b9099;
+    --color-neutral-700: #b3b8c0;
+    --color-neutral-800: #d5d8dd;
+    --color-neutral-900: #eef0f3;
+
+    --color-accent: #3b6fff;
+    --color-accent-100: #101a33;
+    --color-accent-200: #16234a;
+    --color-accent-300: #1d3370;
+    --color-accent-400: #2b4fb8;
+    --color-accent-500: #3b6fff;
+    --color-accent-600: #5c88ff;
+    --color-accent-700: #9bb6ff;
+    --color-accent-800: #c3d3ff;
+    --color-accent-900: #e4ebff;
+
+    --color-accent-2: #2fb894;
+    --color-accent-2-100: #0c2620;
+    --color-accent-2-200: #103a2f;
+    --color-accent-2-300: #17594a;
+    --color-accent-2-400: #1f8a70;
+    --color-accent-2-500: #2fb894;
+    --color-accent-2-600: #46d3ad;
+    --color-accent-2-700: #86ecd0;
+    --color-accent-2-800: #b6f3e1;
+    --color-accent-2-900: #ddf9f0;
+
+    --font-heading: "Sora", system-ui, sans-serif;
+    --font-heading-weight: 600;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+    --shadow-md: 0 6px 20px rgba(0,0,0,0.55);
+    --shadow-lg: 0 18px 46px rgba(0,0,0,0.65);
+  }
+  body { margin: 0; background: var(--color-bg); }
+  h1, h2, h3, h4 { letter-spacing: -0.03em; }
+  .btn-primary { color: var(--color-on-accent); }
+  .btn-primary:hover { background: var(--color-accent-600); }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent-800); }
+  .tag-neutral { background: var(--color-neutral-200); color: var(--color-neutral-800); }
+  .tag-accent { background: var(--color-accent-200); color: var(--color-accent-800); }
+  .tag-accent-2 { background: var(--color-accent-2-200); color: var(--color-accent-2-800); }
+  .tag-outline { color: var(--color-accent-700); border-color: var(--color-accent-400); }
+  .input { background: var(--color-neutral-100); color: var(--color-text); }
+  textarea.input { font-family: var(--font-body); line-height: 1.5; resize: vertical; }
+  option { background: var(--color-neutral-100); color: var(--color-text); }
+</style>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <rect width="120" height="120" fill="#0a0a0a"></rect>
+    <circle cx="60" cy="60" r="26" fill="#3b6fff"></circle>
+    <circle cx="60" cy="60" r="11" fill="#0a0a0a"></circle>
+    <rect x="36" y="86" width="48" height="6" rx="3" fill="#2fb894"></rect>
+  </svg>
+</template>
+</helmet>
+<div style="min-height:100vh;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);position:relative;overflow-x:hidden">
+  <div style="position:absolute;top:-220px;right:-160px;width:620px;height:620px;border-radius:50%;background:var(--color-accent-200);opacity:0.5;pointer-events:none"></div>
+  <div style="position:absolute;top:340px;left:-260px;width:480px;height:480px;border-radius:50%;background:var(--color-accent-2-200);opacity:0.45;pointer-events:none"></div>
+
+  <sc-if value="{{ locked }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--space-8) var(--space-6)">
+      <div style="width:min(420px,100%)">
+        <div style="display:flex;align-items:center;gap:13px;margin-bottom:var(--space-8)">
+          <image-slot id="qualix-logo" style="width:44px;height:44px" shape="rounded" radius="14" fit="contain" placeholder="Logo"></image-slot>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <div style="font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1;letter-spacing:-0.025em">{{ teamName }}</div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent-2-500);flex:none"></span>
+              <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-neutral-600)">Bid tracker</span>
+            </div>
+          </div>
+        </div>
+        <h1 style="font-size:40px;line-height:1.02;margin:0 0 var(--space-2)">Enter your code</h1>
+        <p style="margin:0 0 var(--space-4);color:var(--color-neutral-700)">Each person has their own access code. The code decides which seat you land in and what you can change.</p>
+        <div class="card elev-md" style="padding:var(--space-6);gap:var(--space-3)">
+          <input class="input" type="password" value="{{ pwInput }}" onChange="{{ onPwInput }}" onKeyDown="{{ onPwKey }}" placeholder="Access code" style="background:var(--color-neutral-100)">
+          <sc-if value="{{ pwError }}" hint-placeholder-val="{{ false }}">
+            <div style="color:var(--color-accent-700);font-size:13px">That code doesn't match any seat.</div>
+          </sc-if>
+          <button class="btn btn-primary btn-block" onClick="{{ onUnlock }}">Sign in</button>
+          <div style="display:flex;flex-direction:column;gap:8px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+            <sc-for list="{{ seats }}" as="s" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px;font-size:12px">
+                <span style="width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:var(--font-heading);font-size:11px;background:{{ s.bg }};color:var(--color-on-accent)">{{ s.initials }}</span>
+                <span style="flex:1;min-width:0">{{ s.name }}</span>
+                <span class="tag tag-neutral">{{ s.roleLabel }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ true }}">
+  <div style="position:sticky;top:0;z-index:20;padding:var(--space-4) var(--space-6) var(--space-2)">
+    <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;padding:10px 10px 10px var(--space-4);border-radius:999px;background:var(--color-surface);box-shadow:var(--shadow-md)">
+      <div style="display:flex;align-items:center;gap:11px;margin-right:var(--space-4)">
+        <image-slot id="qualix-logo" style="width:40px;height:40px" shape="rounded" radius="13" fit="contain" placeholder="Logo"></image-slot>
+        <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:17px;line-height:1;letter-spacing:-0.025em;white-space:nowrap">{{ teamName }}</div>
+          <div style="display:flex;align-items:center;gap:5px">
+            <span style="width:4px;height:4px;border-radius:50%;background:var(--color-accent-2-500);flex:none"></span>
+            <span style="font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-neutral-600)">Bid tracker</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:4px;align-items:center;margin-right:auto;flex-wrap:wrap;padding:4px;border-radius:999px;background:var(--color-neutral-200)">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+          <button class="btn" onClick="{{ t.onClick }}" style="background:{{ t.bg }};color:{{ t.fg }};font-size:14px;padding:9px 20px;box-shadow:{{ t.shadow }}" style-hover="opacity:0.88">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;padding:4px;border-radius:999px;background:var(--color-neutral-200)">
+        <button class="btn btn-icon" onClick="{{ prevMonth }}" title="Previous month" style="background:var(--color-neutral-100);font-size:18px">‹</button>
+        <span style="font-family:var(--font-heading);font-size:15px;min-width:132px;text-align:center">{{ monthLabel }}</span>
+        <button class="btn btn-icon" onClick="{{ nextMonth }}" title="Next month" style="background:var(--color-neutral-100);font-size:18px">›</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--color-neutral-200)">
+        <div style="text-align:right;line-height:1.15">
+          <div style="font-size:13px;font-weight:600">{{ userName }}</div>
+          <div class="text-muted" style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase">{{ userRole }}</div>
+        </div>
+        <span style="width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-family:var(--font-heading);background:var(--color-accent);color:var(--color-on-accent)">{{ userInitials }}</span>
+        <button class="btn btn-icon" onClick="{{ signOut }}" title="Sign out" style="background:var(--color-neutral-100);font-size:15px">⏻</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:var(--space-6) var(--space-6) calc(var(--space-8) * 2)">
+
+    <!-- ══ ADMIN / LEAD DASHBOARD ══ -->
+    <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;margin-bottom:var(--space-8)">
+          <div style="max-width:20ch">
+            <div class="card-kicker" style="margin-bottom:var(--space-2)">{{ scopeLabel }} · {{ monthLabel }}</div>
+            <h1 style="font-size:58px;line-height:0.98;margin:0">Team performance</h1>
+          </div>
+          <div style="max-width:34ch;position:relative;z-index:1;display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start">
+            <p style="margin:0;font-size:15px;color:var(--color-neutral-700)">{{ adminSub }}</p>
+            <div style="display:flex;gap:var(--space-2);flex-wrap:wrap">
+              <button class="btn btn-primary" onClick="{{ exportAll }}">Download all data</button>
+              <button class="btn btn-secondary" onClick="{{ exportCsv }}">This month only</button>
+              <button class="btn btn-secondary" onClick="{{ openTargets }}">Edit targets</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:var(--space-3);margin-bottom:calc(var(--space-8) * 1.4)">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+            <div class="card elev-sm" style="padding:var(--space-4);gap:var(--space-3);background:{{ k.cardBg }}">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-2)">
+                <div class="card-kicker" style="color:{{ k.color }}">{{ k.label }}</div>
+                <svg viewBox="0 0 40 40" style="width:40px;height:40px;flex:none;transform:rotate(-90deg)">
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-neutral-300)" stroke-width="5"></circle>
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="{{ k.color }}" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="{{ k.pct }} 100"></circle>
+                </svg>
+              </div>
+              <div style="font-family:var(--font-heading);font-size:38px;line-height:1">{{ k.value }}</div>
+              <div class="card-meta" style="line-height:1.4">{{ k.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:var(--space-3);margin-bottom:var(--space-4);flex-wrap:wrap">
+          <h2 style="margin:0;font-size:36px">Bidders</h2>
+          <span class="text-muted" style="font-size:14px;padding-bottom:5px">Ranked by leads against target</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:calc(var(--space-8) * 1.4)">
+          <sc-for list="{{ leaderboard }}" as="b" hint-placeholder-count="1">
+            <div onClick="{{ b.onOpen }}" class="elev-sm" style="cursor:pointer;display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;padding:var(--space-4) var(--space-6);border-radius:calc(var(--radius-lg) * 1.15);background:var(--color-surface)" style-hover="box-shadow:var(--shadow-md);background:var(--color-neutral-100)">
+              <div style="display:flex;align-items:center;gap:var(--space-3);min-width:0;flex:1 1 230px">
+                <span style="width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:14px;font-family:var(--font-heading);background:{{ b.avatarBg }};color:var(--color-on-accent)">{{ b.initials }}</span>
+                <div style="min-width:0">
+                  <div style="font-family:var(--font-heading);font-size:19px;line-height:1.15">{{ b.name }}</div>
+                  <div style="display:flex;gap:6px;align-items:center;margin-top:5px;flex-wrap:wrap">
+                    <span class="tag {{ b.paceTag }}">{{ b.pace }}</span>
+                    <span class="text-muted" style="font-size:12px">{{ b.summary }}</span>
+                  </div>
+                </div>
+              </div>
+              <div style="flex:1 1 320px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--space-4)">
+                <div style="min-width:0">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span class="text-muted">Leads</span><span style="font-weight:600">{{ b.leadsLabel }}</span></div>
+                  <div style="height:8px;border-radius:999px;background:var(--color-neutral-200);overflow:hidden">
+                    <div style="height:100%;border-radius:999px;width:{{ b.leadsPct }}%;background:{{ b.leadsColor }}"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span class="text-muted">Net connects</span><span style="font-weight:600">{{ b.connectsLabel }}</span></div>
+                  <div style="height:8px;border-radius:999px;background:var(--color-neutral-200);overflow:hidden">
+                    <div style="height:100%;border-radius:999px;width:{{ b.connectsPct }}%;background:{{ b.connectsColor }}"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px"><span class="text-muted">Lead value</span><span style="font-weight:600">{{ b.valueLabel }}</span></div>
+                  <div style="height:8px;border-radius:999px;background:var(--color-neutral-200);overflow:hidden">
+                    <div style="height:100%;border-radius:999px;width:{{ b.valuePct }}%;background:var(--color-accent-2-500)"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:var(--space-3);flex:0 0 auto;margin-left:auto">
+                <span class="tag {{ b.pendingTag }}">{{ b.pending }}</span>
+                <span style="width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--color-neutral-100);color:var(--color-accent-700);font-size:17px">›</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-3)">
+          <div class="card elev-sm" style="padding:var(--space-6);gap:var(--space-3);background:var(--color-accent-100)">
+            <div class="card-kicker">Review backlog</div>
+            <div class="card-title" style="font-size:24px">{{ backlogTitle }}</div>
+            <p class="card-body" style="font-size:14px">{{ backlogBody }}</p>
+            <button class="btn btn-primary" onClick="{{ goQueue }}" style="align-self:flex-start">Open review queue</button>
+          </div>
+          <div class="card elev-sm" style="padding:var(--space-6);gap:var(--space-3)">
+            <div class="card-kicker" style="color:var(--color-accent-2-700)">Boosted &amp; refunds</div>
+            <div class="card-title" style="font-size:24px">{{ boostTitle }}</div>
+            <p class="card-body" style="font-size:14px">{{ boostBody }}</p>
+            <button class="btn btn-secondary" onClick="{{ openRecon }}" style="align-self:flex-start">Reconcile connects</button>
+          </div>
+          <div class="card elev-sm" style="padding:var(--space-6);gap:var(--space-3);background:var(--color-accent-2-100)">
+            <div class="card-kicker" style="color:var(--color-accent-2-700)">Month pacing</div>
+            <div class="card-title" style="font-size:24px">{{ paceTitle }}</div>
+            <p class="card-body" style="font-size:14px">{{ paceBody }}</p>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══ BIDDER WORKSPACE ══ -->
+    <sc-if value="{{ isBidder }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <sc-if value="{{ showBidderPicker }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--space-6);align-items:center">
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-right:4px">Viewing</span>
+            <sc-for list="{{ bidderPills }}" as="p" hint-placeholder-count="1">
+              <button class="btn" onClick="{{ p.onClick }}" style="background:{{ p.bg }};color:{{ p.fg }};border:1px solid var(--color-divider);font-size:13px;padding:8px 16px" style-hover="border-color:var(--color-accent)">{{ p.name }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;margin-bottom:var(--space-6)">
+          <div>
+            <div class="card-kicker" style="margin-bottom:var(--space-2)">Bidder workspace · {{ monthLabel }}</div>
+            <h1 style="font-size:58px;line-height:0.98;margin:0">{{ who.name }}</h1>
+          </div>
+          <div style="max-width:34ch;position:relative;z-index:1">
+            <p style="margin:0 0 8px;color:var(--color-neutral-700)">{{ who.sub }}</p>
+            <p style="margin:0;font-size:12px;color:var(--color-neutral-600)">{{ roleNote }}</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--space-3);margin-bottom:calc(var(--space-8) * 1.2)">
+          <sc-for list="{{ myTargets }}" as="k" hint-placeholder-count="4">
+            <div class="card elev-sm" style="padding:var(--space-4);gap:var(--space-3);background:{{ k.cardBg }}">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-2)">
+                <div class="card-kicker" style="color:{{ k.color }}">{{ k.label }}</div>
+                <svg viewBox="0 0 40 40" style="width:40px;height:40px;flex:none;transform:rotate(-90deg)">
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-neutral-300)" stroke-width="5"></circle>
+                  <circle cx="20" cy="20" r="16" fill="none" stroke="{{ k.color }}" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="{{ k.pct }} 100"></circle>
+                </svg>
+              </div>
+              <div style="font-family:var(--font-heading);font-size:34px;line-height:1">{{ k.value }}</div>
+              <div class="card-meta" style="line-height:1.4">{{ k.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:flex-end;gap:var(--space-3);margin-bottom:var(--space-3);flex-wrap:wrap">
+          <h2 style="margin:0;font-size:36px">Proposals</h2>
+          <span class="text-muted" style="font-size:14px;padding-bottom:5px">{{ rowsCount }}</span>
+          <div style="margin-left:auto;display:flex;gap:var(--space-2);flex-wrap:wrap">
+            <button class="btn btn-secondary" onClick="{{ openRecon }}">Paste connects history</button>
+            <sc-if value="{{ canExport }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-secondary" onClick="{{ exportAll }}">Download all data</button>
+            </sc-if>
+            <button class="btn btn-primary" onClick="{{ openNew }}">+ Log proposal</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-4);padding:var(--space-2);border-radius:999px;background:var(--color-surface)">
+          <input class="input" value="{{ search }}" onChange="{{ onSearch }}" placeholder="Search job, category, country…" style="max-width:320px;background:var(--color-neutral-100)">
+          <select class="input" value="{{ statusFilter }}" onChange="{{ onStatusFilter }}" style="max-width:180px;background:var(--color-neutral-100)">
+            <sc-for list="{{ statusOptions }}" as="s" hint-placeholder-count="6">
+              <option value="{{ s }}">{{ s }}</option>
+            </sc-for>
+          </select>
+          <button class="btn" onClick="{{ toggleLeadOnly }}" style="background:{{ leadOnlyBg }};color:{{ leadOnlyFg }};border:1px solid var(--color-divider);font-size:13px">Leads only</button>
+          <button class="btn" onClick="{{ toggleBoostOnly }}" style="background:{{ boostOnlyBg }};color:{{ boostOnlyFg }};border:1px solid var(--color-divider);font-size:13px">Boosted</button>
+          <button class="btn" onClick="{{ toggleHighQOnly }}" style="background:{{ highQBg }};color:{{ highQFg }};border:1px solid var(--color-divider);font-size:13px">4★+ quality</button>
+          <button class="btn" onClick="{{ toggleUnevalOnly }}" style="background:{{ unevalBg }};color:{{ unevalFg }};border:1px solid var(--color-divider);font-size:13px">Not evaluated</button>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="0">
+            <div class="elev-sm" style="display:grid;grid-template-columns:minmax(260px,2fr) repeat(4,minmax(96px,auto)) auto;gap:var(--space-4);align-items:center;padding:var(--space-3) var(--space-4);border-radius:calc(var(--radius-lg) * 1.1);background:var(--color-surface)" style-hover="background:var(--color-neutral-100)">
+              <div style="min-width:0">
+                <a href="{{ r.url }}" target="_blank" rel="noopener" style="font-weight:700;text-decoration:none;font-size:15px">{{ r.title }} ↗</a>
+                <div style="display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap">
+                  <span class="tag {{ r.statusTag }}">{{ r.status }}</span>
+                  <sc-if value="{{ r.boosted }}" hint-placeholder-val="{{ false }}">
+                    <span class="tag tag-outline">{{ r.boostLabel }}</span>
+                  </sc-if>
+                  <span class="text-muted" style="font-size:12px">{{ r.meta }}</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Sent</div>
+                <div style="font-size:14px;white-space:nowrap">{{ r.date }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Connects</div>
+                <div style="font-size:14px;white-space:nowrap">{{ r.connectsLabel }}</div>
+                <div style="font-size:11px;color:{{ r.refundColor }};white-space:nowrap">{{ r.refundLabel }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Lead</div>
+                <div style="font-size:14px;white-space:nowrap;color:{{ r.leadColor }}">{{ r.leadSummary }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Review</div>
+                <div style="font-size:14px;white-space:nowrap;color:{{ r.scoreColor }}">{{ r.scoreText }}</div>
+              </div>
+              <sc-if value="{{ r.canEdit }}" hint-placeholder-val="{{ false }}">
+                <button class="btn btn-ghost" onClick="{{ r.onEdit }}" style="font-size:13px">Edit</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ noRows }}" hint-placeholder-val="{{ true }}">
+          <div class="card elev-sm" style="padding:var(--space-8);text-align:center;gap:var(--space-3);align-items:center">
+            <div class="card-title">{{ emptyTitle }}</div>
+            <p class="card-body" style="max-width:44ch">{{ emptyBody }}</p>
+            <button class="btn btn-primary" onClick="{{ openNew }}">+ Log the first proposal</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ══ REVIEW QUEUE ══ -->
+    <sc-if value="{{ isLead }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;margin-bottom:var(--space-6)">
+          <div>
+            <div class="card-kicker" style="margin-bottom:var(--space-2)">{{ scopeLabel }} · {{ monthLabel }}</div>
+            <h1 style="font-size:58px;line-height:0.98;margin:0">Review queue</h1>
+          </div>
+          <p style="max-width:34ch;margin:0;color:var(--color-neutral-700);position:relative;z-index:1">{{ queueSub }}</p>
+        </div>
+
+        <div style="display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap;margin-bottom:var(--space-4);padding:var(--space-2);border-radius:999px;background:var(--color-surface)">
+          <button class="btn" onClick="{{ queueUneval }}" style="background:{{ qUnevalBg }};color:{{ qUnevalFg }};border:1px solid var(--color-divider);font-size:13px">Not evaluated</button>
+          <button class="btn" onClick="{{ queueHighQ }}" style="background:{{ qHighBg }};color:{{ qHighFg }};border:1px solid var(--color-divider);font-size:13px">4★+ quality</button>
+          <button class="btn" onClick="{{ queueAll }}" style="background:{{ qAllBg }};color:{{ qAllFg }};border:1px solid var(--color-divider);font-size:13px">All this month</button>
+          <select class="input" value="{{ queueBidder }}" onChange="{{ onQueueBidder }}" style="max-width:220px;background:var(--color-neutral-100)">
+            <sc-for list="{{ bidderOptions }}" as="s" hint-placeholder-count="2">
+              <option value="{{ s }}">{{ s }}</option>
+            </sc-for>
+          </select>
+          <span class="text-muted" style="font-size:12px;margin-left:auto">{{ queueCount }}</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+          <sc-for list="{{ queue }}" as="q" hint-placeholder-count="0">
+            <div class="card elev-sm" style="padding:var(--space-6);gap:var(--space-4)">
+              <div style="display:flex;gap:var(--space-4);align-items:flex-start;flex-wrap:wrap">
+                <div style="flex:1 1 320px;min-width:0">
+                  <div class="card-kicker">{{ q.bidder }} · {{ q.date }}</div>
+                  <a href="{{ q.url }}" target="_blank" rel="noopener" style="font-family:var(--font-heading);font-size:22px;text-decoration:none;display:block;margin:6px 0">{{ q.title }} ↗</a>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                    <span class="tag tag-neutral">{{ q.connects }}</span>
+                    <span class="tag tag-neutral">{{ q.budget }}</span>
+                    <span class="tag tag-neutral">{{ q.country }}</span>
+                    <span class="tag {{ q.statusTag }}">{{ q.status }}</span>
+                    <span class="tag {{ q.leadTag }}">{{ q.leadLabel }}</span>
+                    <sc-if value="{{ q.boosted }}" hint-placeholder-val="{{ false }}">
+                      <span class="tag tag-outline">{{ q.boostLabel }}</span>
+                    </sc-if>
+                  </div>
+                </div>
+                <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+                  <div class="text-muted" style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase">Quality</div>
+                  <div style="display:flex;gap:2px;padding:6px 12px;border-radius:999px;background:var(--color-neutral-100)">
+                    <sc-for list="{{ q.stars }}" as="s" hint-placeholder-count="5">
+                      <button onClick="{{ s.onClick }}" title="{{ s.title }}" style="border:0;background:transparent;cursor:pointer;font-size:26px;line-height:1;padding:0 3px;color:{{ s.color }}" style-hover="transform:scale(1.15)">★</button>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:var(--space-3);align-items:flex-end;flex-wrap:wrap;padding:var(--space-3);border-radius:var(--radius-lg);background:var(--color-neutral-100)">
+                <div class="field" style="width:190px">
+                  <label>Confirmed lead value ($)</label>
+                  <input class="input" type="number" value="{{ q.actual }}" onChange="{{ q.onActual }}" placeholder="{{ q.actualPlaceholder }}">
+                </div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;padding-bottom:6px">
+                  <sc-for list="{{ q.bands }}" as="b" hint-placeholder-count="5">
+                    <button class="btn" onClick="{{ b.onClick }}" style="background:{{ b.bg }};color:{{ b.fg }};border:1px solid var(--color-divider);font-size:12px;padding:7px 14px">{{ b.label }}</button>
+                  </sc-for>
+                </div>
+                <span class="text-muted" style="font-size:12px;flex:1 1 200px;min-width:0">{{ q.actualNote }}</span>
+              </div>
+              <div style="display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap">
+                <input class="input" value="{{ q.comment }}" onChange="{{ q.onComment }}" placeholder="Feedback for the bidder…" style="flex:1 1 280px">
+                <button class="btn btn-secondary" onClick="{{ q.onEdit }}">Edit entry</button>
+                <button class="btn btn-primary" onClick="{{ q.onSave }}">{{ q.saveLabel }}</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ queueEmpty }}" hint-placeholder-val="{{ true }}">
+          <div class="card elev-sm" style="padding:var(--space-8);text-align:center">
+            <div class="card-title">{{ queueEmptyTitle }}</div>
+            <p class="card-body">{{ queueEmptyBody }}</p>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ══ BIDDER PROFILE ══ -->
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <button class="btn btn-ghost" onClick="{{ backToAdmin }}" style="margin-bottom:var(--space-3)">‹ Back to dashboard</button>
+        <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-6);flex-wrap:wrap">
+          <span style="width:88px;height:88px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:28px;font-family:var(--font-heading);background:{{ prof.avatarBg }};color:var(--color-on-accent)">{{ prof.initials }}</span>
+          <div>
+            <h1 style="margin:0;font-size:52px;line-height:1">{{ prof.name }}</h1>
+            <div class="text-muted" style="margin-top:6px">{{ prof.sub }}</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--space-3);margin-bottom:calc(var(--space-8) * 1.2)">
+          <sc-for list="{{ prof.stats }}" as="k" hint-placeholder-count="6">
+            <div class="card elev-sm" style="padding:var(--space-4)">
+              <div class="card-kicker">{{ k.label }}</div>
+              <div style="font-family:var(--font-heading);font-size:32px;line-height:1">{{ k.value }}</div>
+              <div class="card-meta" style="line-height:1.4">{{ k.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <h2 style="font-size:32px;margin-bottom:var(--space-3)">Three-month trend</h2>
+        <div class="card elev-sm" style="padding:var(--space-6);margin-bottom:calc(var(--space-8) * 1.2)">
+          <div style="display:flex;gap:var(--space-6);align-items:flex-end;height:190px;padding-top:var(--space-2)">
+            <sc-for list="{{ prof.trend }}" as="t" hint-placeholder-count="3">
+              <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%">
+                <div style="font-size:13px;font-weight:600">{{ t.leads }}</div>
+                <div style="width:100%;max-width:90px;border-radius:14px 14px 6px 6px;height:{{ t.h }}%;background:{{ t.color }}"></div>
+                <div class="text-muted" style="font-size:12px">{{ t.month }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <h2 style="font-size:32px;margin-bottom:var(--space-3)">Proposals this month</h2>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <sc-for list="{{ prof.rows }}" as="r" hint-placeholder-count="0">
+            <div class="elev-sm" style="display:grid;grid-template-columns:minmax(260px,2fr) repeat(4,minmax(96px,auto));gap:var(--space-4);align-items:center;padding:var(--space-3) var(--space-4);border-radius:calc(var(--radius-lg) * 1.1);background:var(--color-surface)">
+              <div style="min-width:0">
+                <a href="{{ r.url }}" target="_blank" rel="noopener" style="font-weight:700;text-decoration:none;font-size:15px">{{ r.title }} ↗</a>
+                <div style="display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap">
+                  <span class="tag {{ r.statusTag }}">{{ r.status }}</span>
+                  <span class="text-muted" style="font-size:12px">{{ r.meta }}</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Sent</div>
+                <div style="font-size:14px;white-space:nowrap">{{ r.date }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Connects</div>
+                <div style="font-size:14px;white-space:nowrap">{{ r.connectsLabel }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Lead</div>
+                <div style="font-size:14px;white-space:nowrap;color:{{ r.leadColor }}">{{ r.leadSummary }}</div>
+              </div>
+              <div>
+                <div class="text-muted" style="font-size:11px">Review</div>
+                <div style="font-size:14px;white-space:nowrap;color:{{ r.scoreColor }}">{{ r.scoreText }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ profEmpty }}" hint-placeholder-val="{{ true }}">
+          <div class="card elev-sm" style="padding:var(--space-8);text-align:center">
+            <div class="card-title">No proposals in {{ monthLabel }}</div>
+            <p class="card-body">Nothing logged for this bidder in the selected month.</p>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+
+  </sc-if>
+
+  <!-- ══ LOG / EDIT PROPOSAL ══ -->
+  <sc-if value="{{ dialogOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop">
+      <div class="dialog" style="width:min(680px,100%);max-height:88vh;overflow:auto;padding:var(--space-8)">
+        <div class="dialog-title" style="font-size:30px">{{ dialogTitle }}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)">
+          <div class="field" style="grid-column:1/-1">
+            <label>Job title</label>
+            <input class="input" value="{{ form.title }}" onChange="{{ onFormTitle }}" placeholder="Shopify subscription app — bug fixes">
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label>Upwork job link</label>
+            <input class="input" value="{{ form.url }}" onChange="{{ onFormUrl }}" placeholder="https://www.upwork.com/jobs/~01…">
+          </div>
+          <div class="field">
+            <label>Connects spent</label>
+            <input class="input" type="number" value="{{ form.connects }}" onChange="{{ onFormConnects }}">
+          </div>
+          <div class="field">
+            <label>Date sent</label>
+            <input class="input" type="date" value="{{ form.date }}" onChange="{{ onFormDate }}">
+          </div>
+          <div style="grid-column:1/-1;display:flex;gap:var(--space-3);align-items:flex-end;flex-wrap:wrap;padding:var(--space-3);border-radius:var(--radius-lg);background:var(--color-neutral-100)">
+            <button class="btn" onClick="{{ toggleFormBoost }}" style="background:{{ formBoostBg }};color:{{ formBoostFg }};border:1px solid var(--color-divider)">{{ formBoostLabel }}</button>
+            <sc-if value="{{ form.boosted }}" hint-placeholder-val="{{ false }}">
+              <div class="field" style="width:150px">
+                <label>Boost connects</label>
+                <input class="input" type="number" value="{{ form.boostConnects }}" onChange="{{ onFormBoostConnects }}">
+              </div>
+            </sc-if>
+            <sc-if value="{{ form.boosted }}" hint-placeholder-val="{{ false }}">
+              <div class="field" style="width:150px">
+                <label>Refunded so far</label>
+                <input class="input" type="number" value="{{ form.refunded }}" onChange="{{ onFormRefunded }}">
+              </div>
+            </sc-if>
+            <span class="text-muted" style="font-size:12px;flex:1 1 200px;min-width:0">{{ boostHint }}</span>
+          </div>
+          <div class="field">
+            <label>Client budget ($)</label>
+            <input class="input" type="number" value="{{ form.budget }}" onChange="{{ onFormBudget }}">
+          </div>
+          <div class="field">
+            <label>Client country</label>
+            <select class="input" value="{{ form.country }}" onChange="{{ onFormCountry }}">
+              <sc-for list="{{ countryList }}" as="c" hint-placeholder-count="10">
+                <option value="{{ c }}">{{ c }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>Upwork category</label>
+            <select class="input" value="{{ form.category }}" onChange="{{ onFormCategory }}">
+              <sc-for list="{{ categoryList }}" as="c" hint-placeholder-count="9">
+                <option value="{{ c }}">{{ c }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>Subcategory</label>
+            <select class="input" value="{{ form.subcategory }}" onChange="{{ onFormSubcategory }}">
+              <sc-for list="{{ subcategoryList }}" as="s" hint-placeholder-count="8">
+                <option value="{{ s }}">{{ s }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>Response status</label>
+            <select class="input" value="{{ form.status }}" onChange="{{ onFormStatus }}">
+              <sc-for list="{{ statusList }}" as="s" hint-placeholder-count="5">
+                <option value="{{ s }}">{{ s }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>Bidder</label>
+            <sc-if value="{{ canEdit }}" hint-placeholder-val="{{ false }}">
+              <select class="input" value="{{ form.bidder }}" onChange="{{ onFormBidder }}">
+                <sc-for list="{{ bidderNames }}" as="s" hint-placeholder-count="1">
+                  <option value="{{ s }}">{{ s }}</option>
+                </sc-for>
+              </select>
+            </sc-if>
+            <sc-if value="{{ lockedBidder }}" hint-placeholder-val="{{ true }}">
+              <input class="input" value="{{ form.bidder }}" disabled>
+            </sc-if>
+          </div>
+          <div class="field">
+            <label>Lead value range</label>
+            <select class="input" value="{{ form.leadRange }}" onChange="{{ onFormLeadRange }}">
+              <sc-for list="{{ rangeList }}" as="r" hint-placeholder-count="5">
+                <option value="{{ r }}">{{ r }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div style="grid-column:1/-1;display:flex;align-items:center;gap:var(--space-4);padding-top:4px;flex-wrap:wrap">
+            <button class="btn" onClick="{{ toggleFormLead }}" style="background:{{ formLeadBg }};color:{{ formLeadFg }};border:1px solid var(--color-divider)">{{ formLeadLabel }}</button>
+            <span class="text-muted" style="font-size:12px">{{ formEvalNote }}</span>
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ closeDialog }}">Cancel</button>
+          <button class="btn btn-primary" onClick="{{ saveForm }}">{{ saveLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ MONTHLY TARGETS ══ -->
+  <sc-if value="{{ targetsOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop">
+      <div class="dialog" style="width:min(700px,100%);max-height:90vh;overflow:auto;padding:var(--space-8)">
+        <div class="dialog-title" style="font-size:30px">Targets — {{ monthLabel }}</div>
+        <p class="card-body" style="margin:0 0 var(--space-4);max-width:58ch">Set each bidder's goals for this month. Save for the month when a target is a one-off; save as default when it should carry into every month from here on.</p>
+        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+          <sc-for list="{{ targetRows }}" as="t" hint-placeholder-count="1">
+            <div style="padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-neutral-100);display:flex;flex-direction:column;gap:var(--space-3)">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-family:var(--font-heading);background:var(--color-accent);color:var(--color-on-accent)">{{ t.initials }}</span>
+                <span style="font-family:var(--font-heading);font-size:17px">{{ t.name }}</span>
+                <span class="tag {{ t.sourceTag }}" style="margin-left:auto">{{ t.source }}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-3)">
+                <div class="field">
+                  <label>Leads target</label>
+                  <input class="input" type="number" value="{{ t.leads }}" onChange="{{ t.onLeads }}">
+                </div>
+                <div class="field">
+                  <label>Connects cap</label>
+                  <input class="input" type="number" value="{{ t.connects }}" onChange="{{ t.onConnects }}">
+                </div>
+                <div class="field">
+                  <label>Revenue target ($)</label>
+                  <input class="input" type="number" value="{{ t.revenue }}" onChange="{{ t.onRevenue }}">
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="dialog-actions" style="flex-wrap:wrap">
+          <sc-if value="{{ targetsOverridden }}" hint-placeholder-val="{{ false }}">
+            <button class="btn btn-ghost" onClick="{{ resetTargets }}" style="margin-right:auto">Clear this month's override</button>
+          </sc-if>
+          <button class="btn btn-secondary" onClick="{{ closeTargets }}">Cancel</button>
+          <button class="btn btn-secondary" onClick="{{ saveTargetsDefault }}">Save as default</button>
+          <button class="btn btn-primary" onClick="{{ saveTargetsMonth }}">{{ saveTargetsLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ CONNECTS RECONCILIATION ══ -->
+  <sc-if value="{{ reconOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop">
+      <div class="dialog" style="width:min(780px,100%);max-height:90vh;overflow:auto;padding:var(--space-8)">
+        <div class="dialog-title" style="font-size:30px">Connects history — refunds</div>
+        <p class="card-body" style="margin:0 0 var(--space-3);max-width:62ch">Paste your whole Upwork connects history (Settings → Connects → History). Every returned line — refunds on boosted proposals you were outbid on, expired boosts, withdrawn or cancelled bids — is read and subtracted from connects spent.</p>
+        <div class="field">
+          <label>Paste connects history for {{ reconBidder }}</label>
+          <textarea class="input" rows="8" value="{{ reconText }}" onChange="{{ onReconText }}" placeholder="Sep 14, 2026&#9;Boosted proposal refund — Shopify subscription app&#9;+12&#9;148"></textarea>
+        </div>
+        <div style="display:flex;gap:var(--space-2);align-items:center;flex-wrap:wrap;margin:var(--space-3) 0">
+          <button class="btn btn-secondary" onClick="{{ scanRecon }}">Scan history</button>
+          <span class="text-muted" style="font-size:13px">{{ reconSummary }}</span>
+        </div>
+        <sc-if value="{{ reconHasEntries }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:6px;max-height:280px;overflow:auto;padding:var(--space-3);border-radius:var(--radius-lg);background:var(--color-neutral-100)">
+            <sc-for list="{{ reconEntries }}" as="e" hint-placeholder-count="3">
+              <div style="display:flex;gap:var(--space-3);align-items:center;font-size:13px;padding:8px 10px;border-radius:12px;background:var(--color-surface)">
+                <span style="font-family:var(--font-heading);color:var(--color-accent-2-700);min-width:48px">{{ e.amountLabel }}</span>
+                <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ e.desc }}</span>
+                <span class="tag {{ e.matchTag }}">{{ e.match }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ closeRecon }}">Cancel</button>
+          <button class="btn btn-primary" onClick="{{ applyRecon }}">{{ reconApplyLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;teamName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Qualix Solutions&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;codeAdmin&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;QX-ADMIN-4417&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access codes&quot;},&quot;codeLead&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;QX-LEAD-2098&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access codes&quot;},&quot;codeBidder&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;QX-BID-7365&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Access codes&quot;},&quot;leadsTarget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;min&quot;:1,&quot;max&quot;:60,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Targets&quot;},&quot;connectsCap&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:420,&quot;min&quot;:50,&quot;max&quot;:2000,&quot;step&quot;:10,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Targets&quot;},&quot;revenueTarget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:60000,&quot;min&quot;:5000,&quot;max&quot;:300000,&quot;step&quot;:5000,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Targets&quot;},&quot;highlightAtRisk&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  static CATEGORIES = [
+    'Web, Mobile & Software Dev', 'Design & Creative', 'Data Science & Analytics',
+    'IT & Networking', 'Sales & Marketing', 'Admin Support',
+    'Engineering & Architecture', 'Writing', 'Accounting & Consulting'
+  ];
+
+  static RANGES = [
+    { label: '$500 – $1,000', short: '$0.5–1k', mid: 750, max: 1000 },
+    { label: '$1,000 – $5,000', short: '$1–5k', mid: 3000, max: 5000 },
+    { label: '$5,000 – $10,000', short: '$5–10k', mid: 7500, max: 10000 },
+    { label: '$10,000 – $20,000', short: '$10–20k', mid: 15000, max: 20000 },
+    { label: '$20,000+', short: '$20k+', mid: 26000, max: Infinity }
+  ];
+
+  static SUBCATEGORIES = {
+    'Web, Mobile & Software Dev': ['Web Development', 'Mobile Development', 'Ecommerce Development', 'Game Development', 'QA & Testing', 'Scripts & Utilities', 'Desktop Software', 'Product Management'],
+    'Design & Creative': ['Web & Mobile Design', 'Brand Identity & Strategy', 'Graphic Design', 'Video Production', 'Motion Graphics', 'Illustration', 'Presentation Design'],
+    'Data Science & Analytics': ['Data Analysis & Visualization', 'Data Extraction / ETL', 'Machine Learning', 'AI & Deep Learning', 'Data Mining & Management', 'Experimentation & Testing'],
+    'IT & Networking': ['Database Administration', 'DevOps & Solution Architecture', 'Information Security', 'Network Administration', 'Systems Engineering', 'Cloud Migration'],
+    'Sales & Marketing': ['Search Engine Optimization', 'Marketing Automation', 'Lead Generation', 'Social Media Marketing', 'Email Marketing', 'Paid Advertising', 'Market Research'],
+    'Admin Support': ['Virtual Assistance', 'Data Entry', 'Project Management', 'Transcription', 'Customer Service'],
+    'Engineering & Architecture': ['CAD & 3D Modeling', 'Electrical Engineering', 'Mechanical Engineering', 'Interior Design', 'Civil & Structural Engineering'],
+    'Writing': ['Content Writing', 'Copywriting', 'Technical Writing', 'Editing & Proofreading', 'UX Writing'],
+    'Accounting & Consulting': ['Bookkeeping', 'Financial Analysis & Modeling', 'Management Consulting', 'HR Administration', 'Tax Preparation']
+  };
+
+  static COUNTRIES = ['United States', 'United Kingdom', 'Canada', 'Australia', 'Germany', 'Netherlands', 'Ireland', 'France', 'Switzerland', 'Sweden', 'Norway', 'Denmark', 'Spain', 'Italy', 'Poland', 'United Arab Emirates', 'Saudi Arabia', 'Qatar', 'Israel', 'Singapore', 'Hong Kong', 'Japan', 'New Zealand', 'South Africa', 'India', 'Brazil', 'Mexico'];
+
+  static STATUSES = ['No reply', 'Viewed', 'Replied', 'Interview', 'Hired'];
+
+  static USERS = [
+    { id: 'naveed', name: 'Naveed Ahmed', initials: 'NA', role: 'admin', roleLabel: 'Super admin' },
+    { id: 'abeer', name: 'Abeer Shah Khan', initials: 'AK', role: 'lead', roleLabel: 'Team lead' },
+    { id: 'usama', name: 'Syed Usama Ali', initials: 'SU', role: 'bidder', roleLabel: 'Bidder' }
+  ];
+
+  static STORE = 'qualix-bid-tracker-v2';
+
+  static months() {
+    const now = new Date();
+    const out = [];
+    for (let i = 11; i >= -1; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      out.push({
+        key: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'),
+        label: d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+        short: d.toLocaleDateString('en-US', { month: 'short' })
+      });
+    }
+    return out;
+  }
+
+  state = (() => {
+    const months = Component.months();
+    return {
+      months, monthIdx: months.length - 2,
+      proposals: [], refundPool: {}, targets: {}, targetForm: null,
+      userId: null, locked: true, pwInput: '', pwError: false,
+      view: 'admin', activeBidder: 'Syed Usama Ali', profileBidder: null,
+      search: '', statusFilter: 'All statuses', leadOnly: false, unevalOnly: false, boostOnly: false, highQOnly: false,
+      queueMode: 'uneval', queueBidder: 'All bidders',
+      drafts: {}, dialog: null, form: null,
+      recon: null, reconText: '', reconEntries: null
+    };
+  })();
+
+  // Targets resolve: month override → saved default → prop default.
+  targetsFor(monthKey, name) {
+    const T = this.state.targets || {};
+    const d = T['default|' + name] || {};
+    const m = T[monthKey + '|' + name] || {};
+    return {
+      leadsTarget: Number(m.leads ?? d.leads ?? this.props.leadsTarget ?? 12),
+      connectsCap: Number(m.connects ?? d.connects ?? this.props.connectsCap ?? 420),
+      revenueTarget: Number(m.revenue ?? d.revenue ?? this.props.revenueTarget ?? 60000),
+      overridden: !!T[monthKey + '|' + name]
+    };
+  }
+  bidders(monthKey) {
+    return Component.USERS.filter(u => u.role === 'bidder')
+      .map(u => ({ id: u.id, name: u.name, initials: u.initials, ...this.targetsFor(monthKey, u.name) }));
+  }
+
+  openTargets = () => {
+    const key = this.state.months[this.state.monthIdx].key;
+    const form = {};
+    this.bidders(key).forEach(b => {
+      form[b.name] = { leads: String(b.leadsTarget), connects: String(b.connectsCap), revenue: String(b.revenueTarget) };
+    });
+    this.setState({ targetForm: form });
+  };
+  writeTargets(scope) {
+    const S = this.state;
+    const key = scope === 'default' ? 'default' : S.months[S.monthIdx].key;
+    const targets = { ...S.targets };
+    Object.keys(S.targetForm || {}).forEach(name => {
+      const f = S.targetForm[name];
+      targets[key + '|' + name] = {
+        leads: Math.max(0, Number(f.leads) || 0),
+        connects: Math.max(0, Number(f.connects) || 0),
+        revenue: Math.max(0, Number(f.revenue) || 0)
+      };
+    });
+    this.commit({ targets, targetForm: null });
+  }
+  resetTargets = () => {
+    const S = this.state;
+    const key = S.months[S.monthIdx].key;
+    const targets = { ...S.targets };
+    Component.USERS.filter(u => u.role === 'bidder').forEach(u => { delete targets[key + '|' + u.name]; });
+    this.commit({ targets, targetForm: null });
+  };
+
+  bandFor(v) { return Component.RANGES.find(r => v <= r.max) || Component.RANGES[0]; }
+  // The value confirmed in the review meeting wins over the bidder's estimate.
+  isConfirmed(p) { return p.actualValue != null && p.actualValue !== ''; }
+  valueOf(p) { return this.isConfirmed(p) ? (Number(p.actualValue) || 0) : (p.leadValue || 0); }
+
+  componentDidMount() {
+    try {
+      const raw = window.localStorage.getItem(Component.STORE);
+      if (raw) {
+        const saved = JSON.parse(raw);
+        if (saved) {
+          this.setState({
+            proposals: Array.isArray(saved.proposals) ? saved.proposals : [],
+            refundPool: saved.refundPool || {},
+            targets: saved.targets || {},
+            userId: saved.userId || null
+          });
+        }
+      }
+      if (window.sessionStorage.getItem(Component.STORE + '-unlocked') === '1') {
+        const u = Component.USERS.find(x => x.id === (JSON.parse(raw || '{}') || {}).userId);
+        this.setState({ locked: false, view: u ? (u.role === 'bidder' ? 'bidder' : u.role === 'lead' ? 'lead' : 'admin') : 'admin' });
+      }
+    } catch (e) { /* storage unavailable — run in memory */ }
+    // Pick up saves made in another tab of the same browser.
+    this._sync = e => {
+      if (e.key !== Component.STORE || !e.newValue) return;
+      try {
+        const s = JSON.parse(e.newValue);
+        this.setState({
+          proposals: Array.isArray(s.proposals) ? s.proposals : [],
+          refundPool: s.refundPool || {},
+          targets: s.targets || {}
+        });
+      } catch (err) { /* ignore malformed payload */ }
+    };
+    window.addEventListener('storage', this._sync);
+  }
+  componentWillUnmount() { if (this._sync) window.removeEventListener('storage', this._sync); }
+
+  persist(patch) {
+    try {
+      window.localStorage.setItem(Component.STORE, JSON.stringify({
+        proposals: patch.proposals || this.state.proposals,
+        refundPool: patch.refundPool || this.state.refundPool,
+        targets: patch.targets || this.state.targets,
+        userId: patch.userId !== undefined ? patch.userId : this.state.userId
+      }));
+    } catch (e) { /* ignore */ }
+  }
+  commit(patch) { this.setState(patch); this.persist(patch); }
+
+  codes() {
+    return {
+      naveed: String(this.props.codeAdmin ?? 'QX-ADMIN-4417').trim().toLowerCase(),
+      abeer: String(this.props.codeLead ?? 'QX-LEAD-2098').trim().toLowerCase(),
+      usama: String(this.props.codeBidder ?? 'QX-BID-7365').trim().toLowerCase()
+    };
+  }
+
+  onUnlock = () => {
+    const entered = String(this.state.pwInput || '').trim().toLowerCase();
+    const codes = this.codes();
+    const id = Object.keys(codes).find(k => codes[k] && codes[k] === entered);
+    if (!id) { this.setState({ pwError: true }); return; }
+    const u = Component.USERS.find(x => x.id === id);
+    try { window.sessionStorage.setItem(Component.STORE + '-unlocked', '1'); } catch (e) {}
+    this.commit({
+      locked: false, pwError: false, pwInput: '', userId: u.id,
+      view: u.role === 'bidder' ? 'bidder' : u.role === 'lead' ? 'lead' : 'admin'
+    });
+  };
+
+  currentUser() { return Component.USERS.find(u => u.id === this.state.userId) || null; }
+  canEdit() { const u = this.currentUser(); return !!u && u.role !== 'bidder'; }
+  canExportAll() { const u = this.currentUser(); return !!u && u.role !== 'bidder'; }
+
+  // ── connects maths
+  spentOf(p) { return (Number(p.connects) || 0) + (p.boosted ? (Number(p.boostConnects) || 0) : 0); }
+  netOf(p) { return Math.max(0, this.spentOf(p) - (Number(p.refunded) || 0)); }
+  poolKey(monthKey, bidder) { return monthKey + '|' + bidder; }
+  poolFor(monthKey, bidder) { return Number(this.state.refundPool[this.poolKey(monthKey, bidder)] || 0); }
+
+  // ── connects history parser
+  parseConnects(text) {
+    const kw = /(refund|refunded|return|returned|expire|expired|unused|outbid|out-bid|withdraw|cancel|reversal|credited)/i;
+    const dateRe = /^\s*(?:\d{1,2}[\/.\-]\d{1,2}[\/.\-]\d{2,4}|\d{4}-\d{2}-\d{2}|[A-Za-z]{3,9}\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{0,4}|\d{1,2}\s+[A-Za-z]{3,9},?\s*\d{0,4})\s*[,\t·|]*\s*/;
+    return String(text || '').split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(raw => {
+      // Strip the leading date column first — otherwise "Sep 09, 2026" reads as an amount.
+      const line = raw.replace(dateRe, '').replace(/\b(?:19|20)\d{2}\b/g, ' ');
+      const isRefundWord = kw.test(line);
+      const signed = line.match(/(?:^|[\s\t(])([+\-−–—])\s?(\d+(?:\.\d+)?)/);
+      const cols = line.split(/\t+|\s{2,}/).map(c => c.trim()).filter(Boolean);
+      const dropBalance = cols.length > 1 && /^[+\-−–—]?\s?\d+(?:\.\d+)?$/.test(cols[cols.length - 1]);
+      let amount = 0;
+      if (signed) {
+        amount = (signed[1] === '+' ? 1 : -1) * parseFloat(signed[2]);
+      } else if (isRefundWord) {
+        // Prefer the number tied to the word "connect(s)"; otherwise the last
+        // standalone integer that is not the running-balance column.
+        const near = line.match(/(\d+(?:\.\d+)?)\s*connects?\b/i) || line.match(/connects?\D{0,14}(\d+(?:\.\d+)?)/i);
+        if (near) {
+          amount = parseFloat(near[1]);
+        } else {
+          const nums = (dropBalance ? cols.slice(0, -1) : cols).join(' ').match(/\d+(?:\.\d+)?/g);
+          if (nums) amount = parseFloat(nums[nums.length - 1]);
+        }
+      }
+      const refund = amount > 0 || (isRefundWord && amount !== 0);
+      if (!refund) return null;
+      const desc = (dropBalance ? cols.slice(0, -1) : cols).join(' · ')
+        .replace(/(?:^|[\s(])[+\-−–—]\s?\d+(?:\.\d+)?/g, ' ')
+        .replace(/\s{2,}/g, ' ')
+        .replace(/^[\s·,\-−–—]+|[\s·,\-−–—]+$/g, '');
+      return { desc: desc || raw, amount: Math.round(Math.abs(amount)) };
+    }).filter(e => e && e.amount > 0);
+  }
+
+  matchEntry(entry, pool) {
+    const words = entry.desc.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length > 3);
+    let best = null, bestScore = 0;
+    pool.forEach(p => {
+      const t = p.title.toLowerCase();
+      const score = words.filter(w => t.includes(w)).length;
+      if (score > bestScore) { bestScore = score; best = p; }
+    });
+    return bestScore >= 2 ? best : null;
+  }
+
+  scanRecon = () => {
+    const S = this.state;
+    const bidder = S.recon;
+    const monthKey = S.months[S.monthIdx].key;
+    const pool = S.proposals.filter(p => p.bidder === bidder && p.month === monthKey);
+    const parsed = this.parseConnects(S.reconText).map(e => {
+      const m = this.matchEntry(e, pool);
+      return { ...e, pid: m ? m.id : null, matchTitle: m ? m.title : null };
+    });
+    this.setState({ reconEntries: parsed });
+  };
+
+  applyRecon = () => {
+    const S = this.state;
+    const entries = S.reconEntries || [];
+    if (!entries.length) { this.setState({ recon: null, reconText: '', reconEntries: null }); return; }
+    const monthKey = S.months[S.monthIdx].key;
+    const bidder = S.recon;
+    const byId = {};
+    let unmatched = 0;
+    entries.forEach(e => {
+      if (e.pid) byId[e.pid] = (byId[e.pid] || 0) + e.amount;
+      else unmatched += e.amount;
+    });
+    const proposals = S.proposals.map(p => {
+      if (!byId[p.id]) return p;
+      const cap = this.spentOf(p);
+      return { ...p, refunded: Math.min(cap, (Number(p.refunded) || 0) + byId[p.id]) };
+    });
+    const key = this.poolKey(monthKey, bidder);
+    const refundPool = { ...S.refundPool, [key]: this.poolFor(monthKey, bidder) + unmatched };
+    this.commit({ proposals, refundPool, recon: null, reconText: '', reconEntries: null });
+  };
+
+  // ── export
+  download(name, csv) {
+    const url = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  sheet(rows) {
+    const cols = ['Month', 'Bidder', 'Date sent', 'Job title', 'Upwork link', 'Category', 'Subcategory', 'Country', 'Client budget', 'Connects (base)', 'Boosted', 'Boost connects', 'Connects spent', 'Connects refunded', 'Net connects', 'Status', 'Viewed', 'Lead generated', 'Lead value range (est.)', 'Estimated value', 'Confirmed value (after review)', 'Reported value', 'Value confirmed', 'Evaluation score', 'High quality (4★+)', 'Evaluation comments'];
+    const esc = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const body = rows.map(p => [
+      p.month, p.bidder, p.date, p.title, p.url, p.category, p.subcategory || '', p.country, p.budget,
+      p.connects, p.boosted ? 'Yes' : 'No', p.boosted ? (p.boostConnects || 0) : 0,
+      this.spentOf(p), p.refunded || 0, this.netOf(p),
+      p.status, p.status !== 'No reply' ? 'Yes' : 'No', p.lead ? 'Yes' : 'No',
+      p.lead ? this.bandFor(p.leadValue).label : '', p.lead ? (p.leadValue || 0) : 0,
+      this.isConfirmed(p) ? this.valueOf(p) : '', p.lead ? this.valueOf(p) : 0,
+      p.lead ? (this.isConfirmed(p) ? 'Yes' : 'No') : '',
+      p.score || '', p.score >= 4 ? 'Yes' : (p.score ? 'No' : ''), p.comment || ''
+    ].map(esc).join(','));
+    return [cols.map(esc).join(',')].concat(body).join('\r\n');
+  }
+  exportCsv = () => {
+    const key = this.state.months[this.state.monthIdx].key;
+    this.download('qualix-bids-' + key + '.csv', this.sheet(this.state.proposals.filter(p => p.month === key)));
+  };
+  exportAll = () => {
+    const rows = this.state.proposals.slice().sort((a, b) => (a.month + a.bidder + a.date).localeCompare(b.month + b.bidder + b.date));
+    const pool = Object.keys(this.state.refundPool).filter(k => this.state.refundPool[k] > 0);
+    let csv = this.sheet(rows);
+    if (pool.length) {
+      csv += '\r\n\r\n"Unassigned connect refunds (from pasted connects history)"\r\n"Month","Bidder","Connects refunded"\r\n';
+      csv += pool.map(k => '"' + k.split('|')[0] + '","' + k.split('|')[1] + '","' + this.state.refundPool[k] + '"').join('\r\n');
+    }
+    this.download('qualix-bid-tracker-all-data.csv', csv);
+  };
+
+  // ── helpers
+  money(v) { return v >= 1000 ? '$' + (v / 1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'k' : '$' + v; }
+  pct(a, b) { return b ? Math.min(100, Math.round((a / b) * 100)) : 0; }
+  fmtDate(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    if (isNaN(d)) return iso;
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+  statusTag(s) {
+    if (s === 'Hired') return 'tag-accent-2';
+    if (s === 'Interview' || s === 'Replied') return 'tag-accent';
+    return 'tag-neutral';
+  }
+  monthProposals() {
+    const key = this.state.months[this.state.monthIdx].key;
+    return this.state.proposals.filter(p => p.month === key);
+  }
+  agg(list, monthKey, bidderName) {
+    const leads = list.filter(p => p.lead);
+    const viewed = list.filter(p => p.status !== 'No reply');
+    const spent = list.reduce((a, p) => a + this.spentOf(p), 0);
+    const rowRefunds = list.reduce((a, p) => a + (Number(p.refunded) || 0), 0);
+    const pool = monthKey && bidderName ? this.poolFor(monthKey, bidderName) : 0;
+    const refunded = rowRefunds + pool;
+    return {
+      proposals: list.length,
+      spent, refunded, connects: Math.max(0, spent - refunded),
+      boosted: list.filter(p => p.boosted).length,
+      viewed: viewed.length,
+      viewedPct: list.length ? Math.round((viewed.length / list.length) * 100) : 0,
+      leads: leads.length,
+      value: leads.reduce((a, p) => a + this.valueOf(p), 0),
+      confirmed: leads.filter(p => this.isConfirmed(p)).length,
+      confirmedValue: leads.filter(p => this.isConfirmed(p)).reduce((a, p) => a + this.valueOf(p), 0),
+      pending: list.filter(p => !p.score).length,
+      scored: list.filter(p => p.score),
+      highQ: list.filter(p => p.score >= 4).length,
+      highQLeads: list.filter(p => p.score >= 4 && p.lead).length,
+      highQValue: list.filter(p => p.score >= 4 && p.lead).reduce((a, p) => a + this.valueOf(p), 0),
+      avgScore: list.filter(p => p.score).length
+        ? (list.filter(p => p.score).reduce((a, p) => a + p.score, 0) / list.filter(p => p.score).length)
+        : 0
+    };
+  }
+  rowFor(p) {
+    const spent = this.spentOf(p), ref = Number(p.refunded) || 0;
+    return {
+      id: p.id, url: p.url, title: p.title,
+      meta: (p.subcategory || p.category) + ' · ' + p.country,
+      date: this.fmtDate(p.date),
+      connectsLabel: ref ? this.netOf(p) + ' net' : String(spent),
+      refundLabel: ref ? spent + ' spent · ' + ref + ' back' : (p.boosted ? 'incl. ' + (p.boostConnects || 0) + ' boost' : ''),
+      refundColor: ref ? 'var(--color-accent-2-700)' : 'var(--color-neutral-600)',
+      boosted: !!p.boosted,
+      boostLabel: 'Boosted +' + (p.boostConnects || 0),
+      status: p.status, statusTag: this.statusTag(p.status),
+      leadSummary: !p.lead ? 'No lead' : this.isConfirmed(p) ? this.money(this.valueOf(p)) + ' ✓' : this.bandFor(p.leadValue).short + ' est.',
+      leadColor: p.lead ? 'var(--color-accent-2-700)' : 'var(--color-neutral-600)',
+      scoreText: p.score ? '★'.repeat(p.score) + '☆'.repeat(5 - p.score) : 'Not evaluated',
+      scoreColor: p.score >= 4 ? 'var(--color-accent-2-700)' : p.score ? 'var(--color-accent-600)' : 'var(--color-neutral-600)',
+      canEdit: this.canEdit(),
+      onEdit: () => this.openEdit(p)
+    };
+  }
+  setV(k, v) { this.setState({ [k]: v }); }
+
+  openEdit(p) {
+    this.setState({
+      dialog: p.id,
+      form: {
+        ...p, budget: String(p.budget), connects: String(p.connects),
+        boostConnects: String(p.boostConnects || 0), refunded: String(p.refunded || 0),
+        leadRange: this.bandFor(p.leadValue || 750).label
+      }
+    });
+  }
+  openNew = () => {
+    const m = this.state.months[this.state.monthIdx];
+    const now = new Date();
+    const sameMonth = m.key === now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+    const day = sameMonth ? String(now.getDate()).padStart(2, '0') : '01';
+    const u = this.currentUser();
+    this.setState({
+      dialog: 'new',
+      form: {
+        title: '', url: '', connects: '12', date: m.key + '-' + day,
+        boosted: false, boostConnects: '0', refunded: '0',
+        budget: '', country: 'United States', category: Component.CATEGORIES[0],
+        subcategory: Component.SUBCATEGORIES[Component.CATEGORIES[0]][0], status: 'No reply',
+        bidder: u && u.role === 'bidder' ? u.name : this.state.activeBidder,
+        lead: false, leadRange: Component.RANGES[1].label, score: 0, comment: ''
+      }
+    });
+  };
+  saveForm = () => {
+    const f = this.state.form;
+    const rec = {
+      ...f,
+      connects: Number(f.connects) || 0,
+      boostConnects: f.boosted ? (Number(f.boostConnects) || 0) : 0,
+      refunded: Number(f.refunded) || 0,
+      budget: Number(f.budget) || 0,
+      leadValue: f.lead ? ((Component.RANGES.find(r => r.label === f.leadRange) || Component.RANGES[1]).mid) : 0,
+      month: (f.date || '').slice(0, 7),
+      title: f.title || 'Untitled proposal'
+    };
+    const ps = this.state.proposals.slice();
+    if (this.state.dialog === 'new') {
+      rec.id = 'p' + Date.now().toString(36) + Math.floor(Math.random() * 1000).toString(36);
+      rec.score = 0; rec.comment = '';
+      ps.unshift(rec);
+    } else {
+      const i = ps.findIndex(p => p.id === this.state.dialog);
+      if (i > -1) ps[i] = { ...ps[i], ...rec };
+    }
+    this.commit({ proposals: ps, dialog: null, form: null });
+  };
+
+  renderVals() {
+    const S = this.state;
+    const accent = 'var(--color-accent)', sage = 'var(--color-accent-2-500)', warn = 'var(--color-accent-400)';
+    const deepSage = 'var(--color-accent-2-700)', deepAccent = 'var(--color-accent-700)';
+    const month = S.months[S.monthIdx];
+    const mp = this.monthProposals();
+    const bidders = this.bidders(month.key);
+    const teamName = this.props.teamName ?? 'Qualix Solutions';
+    const flagRisk = this.props.highlightAtRisk ?? true;
+
+    const user = this.currentUser();
+    const isBidderRole = !!user && user.role === 'bidder';
+    const all = this.agg(mp, month.key, bidders.length === 1 ? bidders[0].name : null);
+    const hasAny = S.proposals.length > 0;
+
+    const allowed = !user ? [] : isBidderRole ? ['bidder'] : ['admin', 'bidder', 'lead'];
+    const tabDefs = [['admin', 'Dashboard'], ['bidder', isBidderRole ? 'My proposals' : 'Bidders'], ['lead', 'Review queue']]
+      .filter(([k]) => allowed.indexOf(k) > -1);
+    const tabs = tabDefs.map(([k, label]) => {
+      const on = S.view === k || (k === 'admin' && S.view === 'profile');
+      return { label, onClick: () => this.setV('view', k), bg: on ? accent : 'transparent', fg: on ? 'var(--color-on-accent)' : 'var(--color-text)', shadow: on ? 'var(--shadow-sm)' : 'none' };
+    });
+
+    const perBidder = bidders.map(b => ({ b, a: this.agg(mp.filter(p => p.bidder === b.name), month.key, b.name) }));
+    const totalTargets = bidders.reduce((o, b) => ({
+      leads: o.leads + b.leadsTarget, connects: o.connects + b.connectsCap, revenue: o.revenue + b.revenueTarget
+    }), { leads: 0, connects: 0, revenue: 0 });
+
+    const kpis = [
+      { label: 'Proposals sent', value: String(all.proposals), pct: this.pct(all.proposals, bidders.length * 40), sub: all.proposals ? all.pending + ' still unreviewed' : 'Nothing logged yet this month', color: deepAccent, cardBg: 'var(--color-surface)' },
+      { label: 'Leads generated', value: all.leads + ' / ' + totalTargets.leads, pct: this.pct(all.leads, totalTargets.leads), sub: this.pct(all.leads, totalTargets.leads) + '% of the monthly team target', color: deepSage, cardBg: 'var(--color-accent-2-100)' },
+      { label: 'Viewed ratio', value: all.viewedPct + '%', pct: all.viewedPct, sub: all.viewed + ' of ' + all.proposals + ' proposals opened by the client', color: deepAccent, cardBg: 'var(--color-surface)' },
+      { label: 'Net connects', value: all.connects + ' / ' + totalTargets.connects, pct: this.pct(all.connects, totalTargets.connects), sub: all.spent + ' spent · ' + all.refunded + ' refunded back', color: deepAccent, cardBg: 'var(--color-accent-100)' },
+      { label: 'Lead value', value: this.money(all.value), pct: this.pct(all.value, totalTargets.revenue), sub: all.leads ? this.money(all.confirmedValue) + ' confirmed after review (' + all.confirmed + ' of ' + all.leads + ' leads) · target ' + this.money(totalTargets.revenue) : 'of ' + this.money(totalTargets.revenue) + ' target', color: deepSage, cardBg: 'var(--color-surface)' },
+      { label: 'Quality 4★+', value: all.highQ + ' / ' + all.scored.length, pct: this.pct(all.highQ, all.scored.length), sub: all.scored.length ? 'avg ' + all.avgScore.toFixed(1) + '★ · ' + all.highQLeads + ' of these became leads (' + this.money(all.highQValue) + ')' : 'Nothing evaluated yet this month', color: deepSage, cardBg: 'var(--color-accent-2-100)' }
+    ];
+
+    const ranked = perBidder.slice().sort((x, y) => (y.a.leads / y.b.leadsTarget) - (x.a.leads / x.b.leadsTarget));
+    const leaderboard = ranked.map(({ b, a }, i) => {
+      const lp = this.pct(a.leads, b.leadsTarget);
+      const behind = flagRisk && a.proposals > 0 && lp < 60;
+      return {
+        name: b.name, initials: b.initials, avatarBg: i === 0 ? accent : 'var(--color-neutral-600)',
+        pace: !a.proposals ? 'No activity' : behind ? 'Behind pace' : lp >= 100 ? 'Target met' : 'On pace',
+        paceTag: !a.proposals ? 'tag-neutral' : behind ? 'tag-accent' : lp >= 100 ? 'tag-accent-2' : 'tag-neutral',
+        summary: a.proposals + ' proposals · ' + a.viewedPct + '% viewed · ' + this.pct(a.leads, a.proposals) + '% conversion · ' + a.highQ + ' rated 4★+',
+        leadsLabel: a.leads + ' of ' + b.leadsTarget, leadsPct: lp, leadsColor: behind ? warn : sage,
+        connectsLabel: a.connects + ' of ' + b.connectsCap, connectsPct: this.pct(a.connects, b.connectsCap),
+        connectsColor: a.connects > b.connectsCap ? warn : accent,
+        valueLabel: this.money(a.value) + ' of ' + this.money(b.revenueTarget), valuePct: this.pct(a.value, b.revenueTarget),
+        pending: a.pending ? a.pending + ' pending' : 'clear',
+        pendingTag: a.pending ? 'tag-accent' : 'tag-accent-2',
+        onOpen: () => this.setState({ view: 'profile', profileBidder: b.name })
+      };
+    });
+
+    // ── bidder workspace
+    const meName = isBidderRole ? user.name : S.activeBidder;
+    const me = bidders.find(b => b.name === meName) || bidders[0];
+    const mine = mp.filter(p => p.bidder === meName);
+    const mineAgg = this.agg(mine, month.key, meName);
+    const q = S.search.trim().toLowerCase();
+    const rows = mine.filter(p =>
+      (!q || (p.title + p.category + (p.subcategory || '') + p.country + p.status).toLowerCase().includes(q)) &&
+      (S.statusFilter === 'All statuses' || p.status === S.statusFilter) &&
+      (!S.leadOnly || p.lead) && (!S.boostOnly || p.boosted) && (!S.unevalOnly || !p.score) && (!S.highQOnly || p.score >= 4)
+    ).sort((a, b) => b.date.localeCompare(a.date)).map(p => this.rowFor(p));
+
+    const myTargets = [
+      { label: 'Viewed ratio', value: mineAgg.viewedPct + '%', pct: mineAgg.viewedPct, sub: mineAgg.viewed + ' of ' + mineAgg.proposals + ' opened by the client', color: deepAccent, cardBg: 'var(--color-surface)' },
+      { label: 'Leads this month', value: mineAgg.leads + ' / ' + me.leadsTarget, pct: this.pct(mineAgg.leads, me.leadsTarget), sub: Math.max(0, me.leadsTarget - mineAgg.leads) + ' to go', color: deepSage, cardBg: 'var(--color-accent-2-100)' },
+      { label: 'Net connects', value: mineAgg.connects + ' / ' + me.connectsCap, pct: this.pct(mineAgg.connects, me.connectsCap), sub: mineAgg.spent + ' spent · ' + mineAgg.refunded + ' refunded · ' + Math.max(0, me.connectsCap - mineAgg.connects) + ' left', color: deepAccent, cardBg: 'var(--color-accent-100)' },
+      { label: 'Lead value', value: this.money(mineAgg.value), pct: this.pct(mineAgg.value, me.revenueTarget), sub: (mineAgg.confirmed ? this.money(mineAgg.confirmedValue) + ' confirmed after review · ' : '') + 'target ' + this.money(me.revenueTarget), color: deepSage, cardBg: 'var(--color-surface)' },
+      { label: 'Quality 4★+', value: mineAgg.highQ + ' / ' + mineAgg.scored.length, pct: this.pct(mineAgg.highQ, mineAgg.scored.length), sub: mineAgg.scored.length ? 'avg ' + mineAgg.avgScore.toFixed(1) + '★ from your team lead' : 'No evaluations yet this month', color: deepSage, cardBg: 'var(--color-accent-2-100)' }
+    ];
+
+    // ── review queue
+    const qb = S.queueBidder;
+    const queue = mp
+      .filter(p => (S.queueMode === 'all' || (S.queueMode === 'highq' ? p.score >= 4 : !p.score)) && (qb === 'All bidders' || p.bidder === qb))
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map(p => {
+        const d = S.drafts[p.id] || {};
+        const score = d.score !== undefined ? d.score : p.score;
+        const comment = d.comment !== undefined ? d.comment : p.comment;
+        const actualStr = d.actualValue !== undefined ? d.actualValue : (p.actualValue == null ? '' : String(p.actualValue));
+        const dirty = (d.score !== undefined && d.score !== p.score)
+          || (d.comment !== undefined && d.comment !== p.comment)
+          || (d.actualValue !== undefined && d.actualValue !== (p.actualValue == null ? '' : String(p.actualValue)));
+        return {
+          bidder: p.bidder, date: this.fmtDate(p.date), title: p.title, url: p.url,
+          connects: this.netOf(p) + ' net connects', budget: this.money(p.budget), country: p.country,
+          status: p.status, statusTag: this.statusTag(p.status),
+          boosted: !!p.boosted, boostLabel: 'Boosted +' + (p.boostConnects || 0) + ((p.refunded || 0) ? ' · ' + p.refunded + ' back' : ''),
+          leadLabel: !p.lead ? 'No lead' : this.isConfirmed(p) ? 'Lead · ' + this.money(this.valueOf(p)) + ' confirmed' : 'Lead · ' + this.bandFor(p.leadValue).short + ' est.',
+          leadTag: p.lead ? 'tag-accent-2' : 'tag-outline',
+          comment,
+          stars: [1, 2, 3, 4, 5].map(i => ({
+            title: i + ' of 5',
+            color: i <= score ? 'var(--color-accent)' : 'var(--color-neutral-300)',
+            onClick: () => this.setState({ drafts: { ...this.state.drafts, [p.id]: { ...d, score: i } } })
+          })),
+          onComment: e => this.setState({ drafts: { ...this.state.drafts, [p.id]: { ...d, comment: e.target.value } } }),
+          actual: actualStr,
+          actualPlaceholder: p.lead ? String(p.leadValue || 0) + ' est.' : 'Only for leads',
+          actualNote: !p.lead
+            ? 'Mark it as a lead in the entry first, then set what the meeting actually landed.'
+            : actualStr !== '' && Number(actualStr) !== (p.leadValue || 0)
+              ? 'Reporting ' + this.money(Number(actualStr) || 0) + ' instead of the ' + this.money(p.leadValue || 0) + ' estimate.'
+              : 'Enter the real value after the meeting — it replaces the bidder\u2019s estimate everywhere.',
+          bands: Component.RANGES.map(r => ({
+            label: r.short,
+            onClick: () => this.setState({ drafts: { ...this.state.drafts, [p.id]: { ...d, actualValue: String(r.mid) } } }),
+            bg: actualStr !== '' && Number(actualStr) === r.mid ? sage : 'transparent',
+            fg: actualStr !== '' && Number(actualStr) === r.mid ? 'var(--color-on-accent)' : 'var(--color-text)'
+          })),
+          onActual: e => this.setState({ drafts: { ...this.state.drafts, [p.id]: { ...d, actualValue: e.target.value } } }),
+          onEdit: () => this.openEdit(p),
+          saveLabel: dirty ? 'Save evaluation' : p.score ? 'Saved' : 'Rate to save',
+          onSave: () => {
+            if (!score) return;
+            const av = actualStr === '' ? null : Math.max(0, Number(actualStr) || 0);
+            const ps = this.state.proposals.map(x => x.id === p.id ? { ...x, score, comment, actualValue: p.lead ? av : null } : x);
+            const nd = { ...this.state.drafts }; delete nd[p.id];
+            this.commit({ proposals: ps, drafts: nd });
+          }
+        };
+      });
+
+    // ── profile
+    const pbName = S.profileBidder || bidders[0].name;
+    const pb = bidders.find(b => b.name === pbName) || bidders[0];
+    const pbRows = mp.filter(p => p.bidder === pbName);
+    const pbAgg = this.agg(pbRows, month.key, pbName);
+    const scored = pbAgg.scored;
+    const avg = scored.length ? (scored.reduce((a, p) => a + p.score, 0) / scored.length).toFixed(1) : '—';
+    const window3 = S.months.slice(Math.max(0, S.monthIdx - 2), S.monthIdx + 1);
+    const trendVals = window3.map(m => this.agg(S.proposals.filter(p => p.month === m.key && p.bidder === pbName)).leads);
+    const trendMax = Math.max(...trendVals, pb.leadsTarget, 1);
+    const prof = {
+      name: pb.name, initials: pb.initials, avatarBg: accent,
+      sub: 'Bidder · leads target ' + pb.leadsTarget + '/mo · connects cap ' + pb.connectsCap + ' · ' + month.label,
+      stats: [
+        { label: 'Proposals', value: String(pbAgg.proposals), sub: pbAgg.connects + ' net connects · ' + pbAgg.boosted + ' boosted' },
+        { label: 'Viewed ratio', value: pbAgg.viewedPct + '%', sub: pbAgg.viewed + ' of ' + pbAgg.proposals + ' opened' },
+        { label: 'Leads', value: pbAgg.leads + ' / ' + pb.leadsTarget, sub: this.pct(pbAgg.leads, pb.leadsTarget) + '% of target' },
+        { label: 'Lead value', value: this.money(pbAgg.value), sub: (pbAgg.leads ? pbAgg.confirmed + ' of ' + pbAgg.leads + ' confirmed · ' : '') + 'target ' + this.money(pb.revenueTarget) },
+        { label: 'Avg. review score', value: avg, sub: scored.length + ' of ' + pbAgg.proposals + ' evaluated' },
+        { label: 'Quality 4★+', value: pbAgg.highQ + ' / ' + scored.length, sub: this.pct(pbAgg.highQ, scored.length) + '% of evaluated · ' + pbAgg.highQLeads + ' became leads' },
+        { label: 'Connects per lead', value: pbAgg.leads ? String(Math.round(pbAgg.connects / pbAgg.leads)) : '—', sub: 'lower is better' }
+      ],
+      trend: window3.map((m, i) => ({
+        month: m.short, leads: trendVals[i],
+        h: Math.max(4, Math.round((trendVals[i] / trendMax) * 100)),
+        color: m.key === month.key ? accent : 'var(--color-accent-300)'
+      })),
+      rows: pbRows.slice().sort((a, b) => b.date.localeCompare(a.date)).map(p => this.rowFor(p))
+    };
+
+    const f = S.form || {};
+    const setF = k => e => this.setState({ form: { ...this.state.form, [k]: e.target.value } });
+    const reconBidder = S.recon || meName;
+    const reconEntries = S.reconEntries;
+    const reconTotal = (reconEntries || []).reduce((a, e) => a + e.amount, 0);
+
+    return {
+      teamName, tabs,
+      locked: S.locked, signedIn: !S.locked && !!user,
+      pwInput: S.pwInput, pwError: S.pwError,
+      onPwInput: e => this.setState({ pwInput: e.target.value, pwError: false }),
+      onPwKey: e => { if (e.key === 'Enter') this.onUnlock(); },
+      onUnlock: this.onUnlock,
+      seats: Component.USERS.map(u => ({
+        name: u.name, initials: u.initials, roleLabel: u.roleLabel,
+        bg: u.role === 'bidder' ? 'var(--color-accent-2-500)' : u.role === 'lead' ? 'var(--color-accent-400)' : accent
+      })),
+      userName: user ? user.name : '',
+      userInitials: user ? user.initials : '',
+      userRole: user ? user.roleLabel : '',
+      scopeLabel: user ? user.roleLabel : '',
+      signOut: () => {
+        try { window.sessionStorage.removeItem(Component.STORE + '-unlocked'); } catch (e) {}
+        this.commit({ userId: null, locked: true, view: 'admin', profileBidder: null, pwInput: '' });
+      },
+      showBidderPicker: !!user && !isBidderRole && bidders.length > 1,
+      canEdit: this.canEdit(), canExport: this.canExportAll(),
+      lockedBidder: isBidderRole,
+      roleNote: isBidderRole ? 'You can log new proposals and paste your connects history. Logged entries are read-only — ask Abeer for a change.' : 'You can edit any proposal, score it in the review queue and export the full sheet.',
+      monthLabel: month.label,
+      prevMonth: () => this.setV('monthIdx', Math.max(0, S.monthIdx - 1)),
+      nextMonth: () => this.setV('monthIdx', Math.min(S.months.length - 1, S.monthIdx + 1)),
+      isAdmin: !isBidderRole && S.view === 'admin',
+      isBidder: isBidderRole || S.view === 'bidder',
+      isLead: !isBidderRole && S.view === 'lead',
+      isProfile: !isBidderRole && S.view === 'profile',
+
+      adminSub: all.proposals
+        ? bidders.length + ' bidder(s) · ' + all.proposals + ' proposals logged in ' + month.label + ' · ' + all.leads + ' leads against a team target of ' + totalTargets.leads + '.'
+        : 'No proposals logged in ' + month.label + ' yet. Numbers fill in as the team logs bids.',
+      kpis, leaderboard,
+      backlogTitle: all.pending ? all.pending + ' proposals not evaluated' : 'Queue is clear',
+      backlogBody: all.proposals
+        ? 'Reviewed ' + (all.proposals - all.pending) + ' of ' + all.proposals + ' proposals this month. Unreviewed work does not count toward coaching scores.'
+        : 'Nothing to review yet this month.',
+      goQueue: () => this.setState({ view: 'lead', queueMode: 'uneval' }),
+      boostTitle: all.refunded ? all.refunded + ' connects refunded' : (all.boosted ? all.boosted + ' boosted proposals' : 'No refunds recorded'),
+      boostBody: 'Boosted bids that get outbid return their connects. Paste the Upwork connects history and refunds are matched to proposals and subtracted — ' + all.spent + ' spent, ' + all.connects + ' net this month.',
+      paceTitle: this.pct(all.leads, totalTargets.leads) + '% of the month target',
+      paceBody: leaderboard.filter(b => b.pace === 'Behind pace').length + ' of ' + bidders.length + ' bidder(s) behind pace on leads. Net connects usage is at ' + this.pct(all.connects, totalTargets.connects) + '% of the combined cap.',
+
+      bidderPills: bidders.map(b => ({
+        name: b.name, onClick: () => this.setV('activeBidder', b.name),
+        bg: b.name === meName ? accent : 'transparent', fg: b.name === meName ? 'var(--color-on-accent)' : 'var(--color-text)'
+      })),
+      who: {
+        name: meName,
+        sub: month.label + ' · ' + mineAgg.proposals + ' proposals · ' + mineAgg.leads + ' leads · ' + mineAgg.pending + ' awaiting review'
+      },
+      myTargets, rows, noRows: rows.length === 0,
+      emptyTitle: mine.length ? 'Nothing matches' : 'No proposals in ' + month.label,
+      emptyBody: mine.length
+        ? 'No proposals match these filters this month. Clear a filter to see the rest.'
+        : 'Log each Upwork proposal as you send it — job link, connects, whether you boosted it, and the client details.',
+      rowsCount: rows.length + ' of ' + mine.length + ' proposals',
+      search: S.search, onSearch: e => this.setV('search', e.target.value),
+      statusFilter: S.statusFilter, onStatusFilter: e => this.setV('statusFilter', e.target.value),
+      statusOptions: ['All statuses'].concat(Component.STATUSES),
+      toggleLeadOnly: () => this.setV('leadOnly', !S.leadOnly),
+      leadOnlyBg: S.leadOnly ? sage : 'transparent', leadOnlyFg: S.leadOnly ? 'var(--color-on-accent)' : 'var(--color-text)',
+      toggleBoostOnly: () => this.setV('boostOnly', !S.boostOnly),
+      boostOnlyBg: S.boostOnly ? accent : 'transparent', boostOnlyFg: S.boostOnly ? 'var(--color-on-accent)' : 'var(--color-text)',
+      toggleHighQOnly: () => this.setV('highQOnly', !S.highQOnly),
+      highQBg: S.highQOnly ? sage : 'transparent', highQFg: S.highQOnly ? 'var(--color-on-accent)' : 'var(--color-text)',
+      toggleUnevalOnly: () => this.setV('unevalOnly', !S.unevalOnly),
+      unevalBg: S.unevalOnly ? accent : 'transparent', unevalFg: S.unevalOnly ? 'var(--color-on-accent)' : 'var(--color-text)',
+      openNew: this.openNew,
+
+      queue, queueEmpty: queue.length === 0,
+      queueEmptyTitle: all.proposals ? 'Queue clear' : 'Nothing logged yet',
+      queueEmptyBody: all.proposals ? 'Every proposal logged this month has been evaluated.' : 'Proposals appear here the moment a bidder logs them.',
+      queueSub: 'Score each proposal 1–5 and leave one line of feedback. ' + all.pending + ' of ' + all.proposals + ' proposals in ' + month.label + ' are still unevaluated.',
+      queueCount: queue.length + ' shown',
+      queueUneval: () => this.setV('queueMode', 'uneval'), queueAll: () => this.setV('queueMode', 'all'),
+      queueHighQ: () => this.setV('queueMode', 'highq'),
+      qHighBg: S.queueMode === 'highq' ? sage : 'transparent', qHighFg: S.queueMode === 'highq' ? 'var(--color-on-accent)' : 'var(--color-text)',
+      qUnevalBg: S.queueMode === 'uneval' ? accent : 'transparent', qUnevalFg: S.queueMode === 'uneval' ? 'var(--color-on-accent)' : 'var(--color-text)',
+      qAllBg: S.queueMode === 'all' ? accent : 'transparent', qAllFg: S.queueMode === 'all' ? 'var(--color-on-accent)' : 'var(--color-text)',
+      queueBidder: S.queueBidder, onQueueBidder: e => this.setV('queueBidder', e.target.value),
+      bidderOptions: ['All bidders'].concat(bidders.map(b => b.name)),
+
+      prof, profEmpty: prof.rows.length === 0, backToAdmin: () => this.setV('view', 'admin'),
+
+      dialogOpen: !!S.dialog,
+      dialogTitle: S.dialog === 'new' ? 'Log a proposal' : 'Edit proposal',
+      saveLabel: S.dialog === 'new' ? 'Log proposal' : 'Save changes',
+      form: f,
+      statusList: Component.STATUSES, bidderNames: bidders.map(b => b.name),
+      onFormTitle: setF('title'), onFormUrl: setF('url'), onFormConnects: setF('connects'), onFormDate: setF('date'),
+      onFormBudget: setF('budget'), onFormCountry: setF('country'),
+      onFormBoostConnects: setF('boostConnects'), onFormRefunded: setF('refunded'),
+      onFormCategory: e => {
+        const c = e.target.value;
+        this.setState({ form: { ...this.state.form, category: c, subcategory: Component.SUBCATEGORIES[c][0] } });
+      },
+      onFormStatus: setF('status'), onFormBidder: setF('bidder'), onFormLeadRange: setF('leadRange'),
+      onFormSubcategory: setF('subcategory'),
+      categoryList: Component.CATEGORIES, rangeList: Component.RANGES.map(r => r.label),
+      countryList: Component.COUNTRIES,
+      subcategoryList: Component.SUBCATEGORIES[f.category] || Component.SUBCATEGORIES[Component.CATEGORIES[0]],
+      toggleFormBoost: () => this.setState({ form: { ...this.state.form, boosted: !this.state.form.boosted } }),
+      formBoostBg: f.boosted ? accent : 'transparent', formBoostFg: f.boosted ? 'var(--color-on-accent)' : 'var(--color-text)',
+      formBoostLabel: f.boosted ? '⚡ Boosted proposal' : '○ Standard proposal',
+      boostHint: f.boosted ? 'Boost connects are added to the spend. If you get outbid, paste the connects history and the refund comes back off.' : 'Turn this on if you boosted the bid — the extra connects are tracked separately.',
+      toggleFormLead: () => this.setState({ form: { ...this.state.form, lead: !this.state.form.lead } }),
+      formLeadBg: f.lead ? sage : 'transparent', formLeadFg: f.lead ? 'var(--color-on-accent)' : 'var(--color-text)',
+      formLeadLabel: f.lead ? '● Lead generated' : '○ No lead yet',
+      formEvalNote: S.dialog === 'new' ? 'New proposals enter the review queue unevaluated.' : 'Evaluation is set by the team lead in the review queue.',
+      closeDialog: () => this.setState({ dialog: null, form: null }),
+      saveForm: this.saveForm,
+
+      targetsOpen: !!S.targetForm,
+      openTargets: this.openTargets,
+      closeTargets: () => this.setState({ targetForm: null }),
+      saveTargetsMonth: () => this.writeTargets('month'),
+      saveTargetsDefault: () => this.writeTargets('default'),
+      saveTargetsLabel: 'Save for ' + month.label,
+      resetTargets: this.resetTargets,
+      targetsOverridden: bidders.some(b => b.overridden),
+      targetRows: bidders.map(b => {
+        const f = (S.targetForm || {})[b.name] || { leads: '', connects: '', revenue: '' };
+        const setT = k => e => this.setState({
+          targetForm: { ...this.state.targetForm, [b.name]: { ...this.state.targetForm[b.name], [k]: e.target.value } }
+        });
+        return {
+          name: b.name, initials: b.initials,
+          leads: f.leads, connects: f.connects, revenue: f.revenue,
+          source: b.overridden ? 'Set for this month' : 'Using default',
+          sourceTag: b.overridden ? 'tag-accent' : 'tag-neutral',
+          onLeads: setT('leads'), onConnects: setT('connects'), onRevenue: setT('revenue')
+        };
+      }),
+
+      reconOpen: !!S.recon,
+      reconBidder,
+      openRecon: () => this.setState({ recon: meName, reconText: '', reconEntries: null }),
+      closeRecon: () => this.setState({ recon: null, reconText: '', reconEntries: null }),
+      reconText: S.reconText,
+      onReconText: e => this.setState({ reconText: e.target.value, reconEntries: null }),
+      scanRecon: this.scanRecon,
+      reconEntries: (reconEntries || []).map(e => ({
+        amountLabel: '+' + e.amount,
+        desc: e.desc,
+        match: e.matchTitle ? e.matchTitle : 'Unassigned',
+        matchTag: e.matchTitle ? 'tag-accent-2' : 'tag-neutral'
+      })),
+      reconHasEntries: !!reconEntries && reconEntries.length > 0,
+      reconSummary: !reconEntries
+        ? 'Nothing scanned yet.'
+        : reconEntries.length
+          ? reconEntries.length + ' refund lines found · ' + reconTotal + ' connects returned'
+          : 'No refund lines found in that paste.',
+      reconApplyLabel: reconEntries && reconEntries.length ? 'Subtract ' + reconTotal + ' connects' : 'Apply',
+      applyRecon: this.applyRecon,
+      exportCsv: this.exportCsv, exportAll: this.exportAll,
+      hasAny
+    };
+  }
+}
+
+</script>
+</body>
+</html>
