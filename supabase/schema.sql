@@ -22,7 +22,12 @@ create table proposals (
   title             text not null,
   url               text,
   date_sent         date not null,
-  month             text generated always as (to_char(date_sent, 'YYYY-MM')) stored,
+  -- to_char() is only STABLE (locale-dependent), not IMMUTABLE, so a generated
+  -- column can't use it — build the 'YYYY-MM' string from extract() instead.
+  month             text generated always as (
+    lpad(extract(year from date_sent)::int::text, 4, '0') || '-' ||
+    lpad(extract(month from date_sent)::int::text, 2, '0')
+  ) stored,
 
   category          text not null,
   subcategory       text,
