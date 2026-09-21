@@ -91,14 +91,20 @@ create table connects_imports (
 
 -- ───────────────────────────── keep updated_at honest
 create or replace function touch_updated_at() returns trigger
-  language plpgsql as $$ begin new.updated_at = now(); return new; end $$;
+  language plpgsql as $fn$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$fn$;
 create trigger proposals_touch before update on proposals
   for each row execute function touch_updated_at();
 
 -- ───────────────────────────── row level security
 create or replace function current_role_of() returns user_role
-  language sql stable security definer set search_path = public as
-  $$ select role from profiles where id = auth.uid() $$;
+  language sql stable security definer set search_path = public as $fn$
+  select role from profiles where id = auth.uid();
+$fn$;
 
 alter table profiles         enable row level security;
 alter table proposals        enable row level security;
@@ -147,7 +153,7 @@ create or replace function apply_connects_refunds(
   p_unassigned integer,
   p_raw       text
 ) returns void
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public as $fn$
 declare m jsonb;
 begin
   if not (auth.uid() = p_bidder or current_role_of() in ('super_admin','team_lead')) then
@@ -175,7 +181,8 @@ begin
   values (p_bidder, p_month, p_raw,
           jsonb_build_object('matches', p_matches, 'unassigned', coalesce(p_unassigned, 0)),
           auth.uid());
-end $$;
+end;
+$fn$;
 
 -- ───────────────────────────── seed
 -- Invite the three users in Supabase Auth first, then map their auth ids here.
