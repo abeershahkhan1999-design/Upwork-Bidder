@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calder &amp; Wynn Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a sticky masthead over hash-routed "views" (CSS :target). Each view is a page of the prototype. */
+:root {
+  --paper: #f4f6f3;
+  --surface: #ffffff;
+  --ink: #15201c;
+  --muted: #56645e;
+  --line: #d6ddd8;
+  --accent: #1e4a3c;
+  --accent-hover: #163a2f;
+  --accent-ink: #ffffff;
+  --brass: #8f6d2c;
+  --brass-soft: #f1e9d6;
+  --focus: #b8892f;
+
+  --f-display: "Libre Caslon Text", "Baskerville", "Georgia", serif;
+  --f-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2rem;
+  --step-4: clamp(2.25rem, 4.6vw, 3.5rem);
+
+  --radius: 4px;
+  --wrap: 1160px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1412; --surface: #151d1a; --ink: #e6ebe8; --muted: #9aa8a1; --line: #29342f;
+    --accent: #78bfa2; --accent-hover: #93d0b7; --accent-ink: #0e1412;
+    --brass: #d4b06a; --brass-soft: #2a2417; --focus: #d4b06a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1412; --surface: #151d1a; --ink: #e6ebe8; --muted: #9aa8a1; --line: #29342f;
+  --accent: #78bfa2; --accent-hover: #93d0b7; --accent-ink: #0e1412;
+  --brass: #d4b06a; --brass-soft: #2a2417; --focus: #d4b06a;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.15; text-wrap: balance; margin: 0; letter-spacing: -0.005em; }
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); }
+p { margin: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.eyebrow { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); }
+.lede { font-size: var(--step-1); color: var(--muted); max-width: 60ch; }
+.mono { font-family: var(--f-mono); font-size: 0.85em; font-variant-numeric: tabular-nums; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font: 600 var(--step-0)/1 var(--f-body);
+  padding: 0.85em 1.25em; border-radius: var(--radius);
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn .arrow { transition: transform .15s; }
+.btn:hover .arrow { transform: translateX(3px); }
+.textlink { font-weight: 600; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+/* Prototype strip + masthead */
+.proto-strip { background: var(--brass-soft); color: var(--ink); font-size: var(--step--1); }
+.proto-strip .wrap { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; justify-content: space-between; padding-block: 0.45rem; }
+.proto-strip strong { color: var(--brass); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.75rem; }
+.masthead { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.masthead .wrap { display: flex; align-items: center; gap: 1.5rem; min-height: 72px; }
+.wordmark { display: flex; align-items: baseline; gap: 0.4rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+.wordmark b { font-family: var(--f-display); font-weight: 400; font-size: 1.5rem; letter-spacing: 0.01em; }
+.wordmark b i { color: var(--brass); }
+.wordmark small { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; color: var(--muted); }
+.nav { display: flex; align-items: center; gap: 0.25rem; }
+.nav a { color: var(--ink); text-decoration: none; font-weight: 500; padding: 0.5rem 0.75rem; border-radius: var(--radius); position: relative; }
+.nav a:hover { background: var(--paper); }
+.nav a.nav-cta { margin-left: 0.5rem; color: var(--accent-ink); background: var(--accent); }
+.nav a.nav-cta:hover { background: var(--accent-hover); }
+.nav-toggle-btn { display: none; }
+
+/* Active nav via :has() */
+body:not(:has(.view:target)) .nav a[href="#home"],
+body:has(#practice:target) .nav a[href="#practice"],
+body:has(#attorneys:target, .profile:target) .nav a[href="#attorneys"],
+body:has(#results:target) .nav a[href="#results"] { color: var(--accent); }
+body:not(:has(.view:target)) .nav a[href="#home"]::after,
+body:has(#practice:target) .nav a[href="#practice"]::after,
+body:has(#attorneys:target, .profile:target) .nav a[href="#attorneys"]::after,
+body:has(#results:target) .nav a[href="#results"]::after {
+  content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: -0.95rem; height: 2px; background: var(--accent);
+}
+
+@media (max-width: 880px) {
+  .nav-toggle-btn { display: inline-flex; }
+  .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+         background: var(--surface); border-bottom: 1px solid var(--line);
+         padding: 0.5rem var(--gutter-r) 1rem var(--gutter-l); display: none; }
+  #navToggle:checked ~ .nav { display: flex; }
+  .nav a { padding: 0.85rem 0.5rem; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .nav a.nav-cta { margin: 0.75rem 0 0; border-bottom: 0; border-radius: var(--radius); justify-content: center; }
+  .nav a::after { display: none; }
+}
+
+/* Views */
+.view { display: none; scroll-margin-top: 400px; }
+.view:target { display: block; }
+main:not(:has(.view:target)) #home { display: block; }
+.view:target, main:not(:has(.view:target)) #home { animation: enter .3s ease-out; }
+@keyframes enter { from { transform: translateY(6px); } to { transform: none; } }
+.section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.section + .section { border-top: 1px solid var(--line); }
+.section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem; margin-bottom: 2.5rem; }
+.section-head > div { display: grid; gap: 0.75rem; max-width: 62ch; }
+.page-head { padding-block: clamp(2.5rem, 6vw, 4.5rem) 2rem; display: grid; gap: 1rem; }
+.crumbs { font-size: var(--step--1); color: var(--muted); }
+.crumbs a { color: var(--muted); }
+
+/* Hero */
+.hero { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.hero-copy { display: grid; gap: 1.5rem; min-width: 0; }
+.hero-copy h1 em { font-style: italic; color: var(--accent); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; color: var(--muted); font-size: var(--step--1); padding-top: 0.5rem; }
+.hero-meta span::before { content: "§ "; color: var(--brass); }
+
+/* Case caption card: styled after a court filing caption */
+.caption {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.75rem; display: grid; gap: 1.25rem; min-width: 0;
+  box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(20, 40, 32, .35);
+}
+.caption-court { font-family: var(--f-display); text-align: center; font-size: var(--step--1); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.caption-grid { display: grid; grid-template-columns: 1fr auto; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.caption-parties { padding: 1rem 1rem 1rem 0; border-right: 1px solid var(--ink); font-family: var(--f-display); display: grid; gap: 0.35rem; }
+.caption-parties .v { font-style: italic; color: var(--muted); }
+.caption-parties small { font-family: var(--f-body); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+.caption-no { padding: 1rem 0 1rem 1rem; display: grid; align-content: center; gap: 0.25rem; font-size: var(--step--1); }
+.caption-result { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; }
+.caption-result .amt { font-family: var(--f-display); font-size: var(--step-3); color: var(--accent); line-height: 1; }
+.tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3em 0.6em; border-radius: 2px; background: var(--brass-soft); color: var(--brass); }
+
+/* Practice cards (home) */
+.pa-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.pa-card { display: grid; gap: 0.6rem; align-content: start; padding: 1.75rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); background: transparent; transition: background-color .15s; min-width: 0; }
+.pa-card:hover { background: var(--surface); }
+.pa-card .sect { font-family: var(--f-mono); font-size: var(--step--1); color: var(--brass); }
+.pa-card p { color: var(--muted); font-size: 0.95rem; }
+.pa-card .more { font-weight: 600; color: var(--accent); font-size: 0.9rem; margin-top: 0.4rem; }
+
+/* Process */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; counter-reset: step; }
+.steps li { counter-increment: step; display: grid; gap: 0.5rem; align-content: start; padding-top: 1.25rem; border-top: 2px solid var(--ink); min-width: 0; }
+.steps li::before { content: "Step " counter(step); font-size: var(--step--1); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass); }
+.steps p { color: var(--muted); font-size: 0.95rem; }
+
+/* Attorneys */
+.atty-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.atty-card { display: grid; gap: 0.85rem; text-decoration: none; color: var(--ink); min-width: 0; }
+.portrait {
+  aspect-ratio: 4 / 5; max-width: 100%; border-radius: var(--radius); display: grid; place-items: center;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 22%, var(--surface)), color-mix(in srgb, var(--accent) 6%, var(--surface)));
+  border: 1px solid var(--line); font-family: var(--f-display); font-size: 3rem; color: var(--accent); transition: transform .2s;
+}
+.atty-card:hover .portrait { transform: translateY(-3px); }
+.atty-card .role { font-size: var(--step--1); color: var(--muted); }
+.atty-card h3 { transition: color .15s; }
+.atty-card:hover h3 { color: var(--accent); }
+
+/* Filter chips (radio + :has) */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label { cursor: pointer; padding: 0.5rem 0.9rem; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9rem; font-weight: 500; background: var(--surface); transition: border-color .15s; }
+.chips label:hover { border-color: var(--ink); }
+.chips input:checked + label { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chips input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+#attorneys:has(#af-lit:checked) .atty-card:not(.lit),
+#attorneys:has(#af-corp:checked) .atty-card:not(.corp),
+#attorneys:has(#af-emp:checked) .atty-card:not(.emp),
+#attorneys:has(#af-est:checked) .atty-card:not(.est) { display: none; }
+
+/* Testimonial */
+.quote { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem 2rem; align-items: start; }
+.quote-mark { font-family: var(--f-display); font-size: 6rem; line-height: 0.7; color: var(--brass); }
+.quote blockquote { margin: 0; font-family: var(--f-display); font-size: var(--step-2); line-height: 1.35; max-width: 36ch; }
+.quote cite { display: block; margin-top: 1.25rem; font-family: var(--f-body); font-style: normal; font-size: var(--step--1); color: var(--muted); }
+
+/* CTA band */
+.band { background: var(--accent); color: var(--accent-ink); }
+.band .wrap { padding-block: clamp(2.5rem, 6vw, 4rem); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; }
+.band h2 { max-width: 22ch; }
+.band .btn { background: var(--accent-ink); color: var(--accent); }
+.band .btn:hover { background: var(--paper); }
+.band p { opacity: 0.85; margin-top: 0.5rem; }
+
+/* Practice detail accordion */
+.areas { display: grid; border-top: 1px solid var(--line); }
+.areas details { border-bottom: 1px solid var(--line); }
+.areas summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 4.5rem 1fr auto; align-items: center; gap: 1rem; padding: 1.5rem 0; }
+.areas summary::-webkit-details-marker { display: none; }
+.areas summary .sect { font-family: var(--f-mono); color: var(--brass); font-size: var(--step--1); }
+.areas summary h3 { font-size: var(--step-2); }
+.areas summary .plus { width: 2rem; height: 2rem; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; font-size: 1.2rem; color: var(--muted); transition: transform .2s; }
+.areas details[open] summary .plus { transform: rotate(45deg); color: var(--ink); border-color: var(--ink); }
+.areas summary:hover h3 { color: var(--accent); }
+.area-body { display: grid; grid-template-columns: 4.5rem 1fr 1fr; gap: 1rem 2rem; padding-bottom: 2rem; }
+.area-body > :first-child { grid-column: 2; }
+.area-body p { color: var(--muted); max-width: 55ch; }
+.area-body ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+.area-body .lead { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; padding-top: 0.5rem; font-size: 0.95rem; }
+
+/* Results table-like list */
+.results { display: grid; border-top: 1px solid var(--ink); }
+.result { display: grid; grid-template-columns: 9rem 1fr 11rem; gap: 0.5rem 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.result h3 { font-size: var(--step-1); }
+.result h3 i { color: var(--muted); }
+.result .court { color: var(--muted); font-size: 0.92rem; margin-top: 0.25rem; }
+.result .out { text-align: right; display: grid; gap: 0.15rem; }
+.result .out b { font-family: var(--f-display); font-weight: 400; font-size: var(--step-2); color: var(--accent); line-height: 1.1; }
+.result .out span { font-size: var(--step--1); color: var(--muted); }
+#results:has(#rf-lit:checked) .result:not(.lit),
+#results:has(#rf-emp:checked) .result:not(.emp),
+#results:has(#rf-re:checked) .result:not(.re),
+#results:has(#rf-ip:checked) .result:not(.ip) { display: none; }
+.disclaimer { font-size: var(--step--1); color: var(--muted); margin-top: 1.5rem; max-width: 75ch; }
+
+/* Profile */
+.profile-grid { display: grid; grid-template-columns: 300px 1fr; gap: clamp(2rem, 5vw, 4rem); padding-bottom: 4rem; }
+.profile-grid aside { display: grid; gap: 1.25rem; align-content: start; min-width: 0; }
+.profile-grid .portrait { font-size: 4.5rem; }
+.facts { display: grid; gap: 1rem; margin: 0; }
+.facts div { display: grid; gap: 0.15rem; border-top: 1px solid var(--line); padding-top: 0.75rem; }
+.facts dt { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; }
+.bio { display: grid; gap: 1.25rem; max-width: 65ch; min-width: 0; }
+.bio h2 { font-size: var(--step-2); margin-top: 1rem; }
+.bio ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.5rem; }
+
+/* Contact / intake */
+.contact-grid { display: grid; grid-template-columns: 1fr 340px; gap: clamp(2rem, 5vw, 4rem); padding-bottom: 4.5rem; align-items: start; }
+.intake { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2.25rem); display: grid; gap: 2rem; min-width: 0; }
+.intake fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 1rem; min-width: 0; }
+.intake legend { font-family: var(--f-display); font-size: var(--step-1); padding: 0; margin-bottom: 1rem; }
+.intake legend span { font-family: var(--f-mono); font-size: var(--step--1); color: var(--brass); margin-right: 0.5rem; }
+.matter-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.matter-types input { position: absolute; opacity: 0; pointer-events: none; }
+.matter-types label { display: grid; gap: 0.15rem; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: border-color .15s, background-color .15s; }
+.matter-types label small { font-weight: 400; color: var(--muted); font-size: 0.8rem; }
+.matter-types label:hover { border-color: var(--ink); }
+.matter-types input:checked + label { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, var(--surface)); box-shadow: inset 0 0 0 1px var(--accent); }
+.matter-types input:focus-visible + label { outline: 2px solid var(--focus); outline-offset: 2px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { display: grid; gap: 0.35rem; min-width: 0; }
+.field label, .field .label { font-size: 0.9rem; font-weight: 600; }
+.field label .opt { font-weight: 400; color: var(--muted); }
+.field input, .field textarea, .field select {
+  font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 0.7rem 0.8rem; width: 100%; transition: border-color .15s;
+}
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
+.field textarea { min-height: 7.5rem; resize: vertical; }
+.field .hint { font-size: var(--step--1); color: var(--muted); }
+.field input:user-invalid, .field textarea:user-invalid { border-color: #b3412e; }
+.inline-radios { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.inline-radios label, .consent { display: flex; gap: 0.5rem; align-items: center; font-weight: 400; font-size: 0.95rem; cursor: pointer; }
+.consent { align-items: start; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+.consent input { margin-top: 0.25rem; accent-color: var(--accent); }
+.inline-radios input { accent-color: var(--accent); }
+.form-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.form-foot small { color: var(--muted); }
+.office { display: grid; gap: 1.5rem; min-width: 0; }
+.office-card { border-top: 2px solid var(--ink); padding-top: 1rem; display: grid; gap: 0.35rem; }
+.office-card h3 { font-size: var(--step-1); }
+.office-card p { color: var(--muted); }
+.copyable { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.copyable .mono { user-select: all; color: var(--ink); font-size: 0.95rem; }
+.copy-btn { font: 500 0.75rem var(--f-body); padding: 0.25rem 0.55rem; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 2px; cursor: pointer; }
+.copy-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Thanks */
+.thanks { max-width: 680px; margin-inline: auto; padding-block: clamp(3rem, 8vw, 6rem); display: grid; gap: 1.5rem; }
+.receipt { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
+.receipt dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.6rem 1.5rem; }
+.receipt dt { color: var(--muted); font-size: 0.9rem; }
+.receipt dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.next-steps { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.5rem; color: var(--muted); }
+
+/* Footer */
+.foot { border-top: 1px solid var(--line); background: var(--surface); font-size: 0.92rem; }
+.foot .wrap { padding-block: 3rem 2rem; display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; }
+.foot h4 { margin: 0 0 0.75rem; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.foot a { color: var(--ink); text-decoration: none; }
+.foot a:hover { color: var(--accent); }
+.foot .legal { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 1.5rem; color: var(--muted); font-size: var(--step--1); display: grid; gap: 0.5rem; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero .wrap, .contact-grid, .profile-grid { grid-template-columns: 1fr; }
+  .profile-grid aside { grid-template-columns: 200px 1fr; align-items: start; }
+  .pa-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .atty-grid { grid-template-columns: repeat(2, 1fr); }
+  .foot .wrap { grid-template-columns: 1fr 1fr; }
+  .foot .wrap > :first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .pa-grid, .steps, .row2, .matter-types { grid-template-columns: 1fr; }
+  .profile-grid aside { grid-template-columns: 1fr; }
+  .profile-grid .portrait { max-width: 220px; }
+  .result { grid-template-columns: 1fr; }
+  .result .out { text-align: left; }
+  .areas summary { grid-template-columns: 1fr auto; }
+  .areas summary .sect { grid-column: 1 / -1; }
+  .area-body { grid-template-columns: 1fr; }
+  .area-body > :first-child, .area-body .lead { grid-column: 1; }
+  .quote { grid-template-columns: 1fr; }
+  .quote-mark { font-size: 4rem; }
+  .caption-grid { grid-template-columns: 1fr; }
+  .caption-parties { border-right: 0; border-bottom: 1px solid var(--ink); padding-right: 0; }
+  .caption-no { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="proto-strip">
+  <div class="wrap">
+    <span><strong>Prototype</strong>&nbsp; Clickable mockup with sample content. Every link and button works.</span>
+    <span>Calder &amp; Wynn LLP is a fictional firm.</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="#home" aria-label="Calder and Wynn, home">
+      <b>Calder <i>&amp;</i> Wynn</b><small>LLP</small>
+    </a>
+    <input type="checkbox" id="navToggle" class="sr" aria-label="Toggle menu">
+    <label for="navToggle" class="btn btn-ghost nav-toggle-btn">Menu</label>
+    <nav class="nav" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#practice">Practice Areas</a>
+      <a href="#attorneys">Attorneys</a>
+      <a href="#results">Case Results</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Free consultation</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section class="view" id="home" aria-label="Home">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Business &amp; trial counsel · Chicago</span>
+        <h1>Counsel for the decisions that <em>define</em> a business.</h1>
+        <p class="lede">For 38 years, Calder &amp; Wynn has represented companies, founders and families in high-stakes litigation, transactions and planning. Partners lead every matter from first call to final order.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Request a consultation <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#practice">Explore practice areas</a>
+        </div>
+        <div class="hero-meta">
+          <span>Licensed in IL, WI &amp; IN</span>
+          <span>Federal &amp; state courts</span>
+          <span>Replies within one business day</span>
+        </div>
+      </div>
+
+      <a class="caption" href="#results" style="text-decoration:none;color:inherit" aria-label="Recent result: Meridian Freight v. Halvorsen Logistics. View all case results.">
+        <div class="caption-court">In the Circuit Court of Cook County, Illinois<br>Law Division</div>
+        <div class="caption-grid">
+          <div class="caption-parties">
+            <span>Meridian Freight Co.,</span>
+            <small>Plaintiff,</small>
+            <span class="v">v.</span>
+            <span>Halvorsen Logistics, Inc.,</span>
+            <small>Defendant.</small>
+          </div>
+          <div class="caption-no">
+            <span class="mono">No. 2024-L-008812</span>
+            <span style="color:var(--muted)">Hon. R. Delgado</span>
+          </div>
+        </div>
+        <div class="caption-result">
+          <div>
+            <span class="tag">Jury verdict · 2026</span>
+            <p style="margin-top:.5rem;color:var(--muted);font-size:.9rem">Breach of a logistics supply contract</p>
+          </div>
+          <span class="amt">$14.2M</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Practice areas</span>
+          <h2>Six groups, one standard of preparation</h2>
+        </div>
+        <a class="textlink" href="#practice">All practice areas →</a>
+      </div>
+      <div class="pa-grid">
+        <a class="pa-card" href="#practice"><span class="sect">§ 1</span><h3>Commercial Litigation</h3><p>Contract, partnership and shareholder disputes through trial and appeal.</p><span class="more">Learn more →</span></a>
+        <a class="pa-card" href="#practice"><span class="sect">§ 2</span><h3>Employment</h3><p>Non-competes, wage-and-hour claims, investigations and executive agreements.</p><span class="more">Learn more →</span></a>
+        <a class="pa-card" href="#practice"><span class="sect">§ 3</span><h3>Real Estate</h3><p>Acquisitions, commercial leasing, zoning and title litigation.</p><span class="more">Learn more →</span></a>
+        <a class="pa-card" href="#practice"><span class="sect">§ 4</span><h3>Intellectual Property</h3><p>Trade secrets, trademark enforcement and licensing.</p><span class="more">Learn more →</span></a>
+        <a class="pa-card" href="#practice"><span class="sect">§ 5</span><h3>Corporate &amp; M&amp;A</h3><p>Formation, financing rounds, acquisitions and governance.</p><span class="more">Learn more →</span></a>
+        <a class="pa-card" href="#practice"><span class="sect">§ 6</span><h3>Estate Planning</h3><p>Trusts, succession plans for family businesses, and probate.</p><span class="more">Learn more →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">How an engagement starts</span>
+          <h2>From first call to a written strategy in two weeks</h2>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><h3>Consultation</h3><p>A 30-minute call with a partner. No cost, and we run a conflict check before we discuss details.</p></li>
+        <li><h3>Case assessment</h3><p>We review your documents and give you a candid read on strengths, risks and likely cost.</p></li>
+        <li><h3>Engagement letter</h3><p>Scope, staffing and fees in writing: hourly, flat-fee or contingency where appropriate.</p></li>
+        <li><h3>Strategy memo</h3><p>A written plan with milestones, a budget range and the decisions that are yours to make.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Our attorneys</span>
+          <h2>Partners who stay on your matter</h2>
+        </div>
+        <a class="textlink" href="#attorneys">Meet the team →</a>
+      </div>
+      <div class="atty-grid">
+        <a class="atty-card" href="#atty-okafor"><div class="portrait">AO</div><div><h3>Adaeze Okafor</h3><span class="role">Managing Partner · Litigation</span></div></a>
+        <a class="atty-card" href="#atty-lindqvist"><div class="portrait">ML</div><div><h3>Martin Lindqvist</h3><span class="role">Partner · Corporate &amp; M&amp;A</span></div></a>
+        <a class="atty-card" href="#atty-reyes"><div class="portrait">SR</div><div><h3>Sofia Reyes</h3><span class="role">Partner · Employment</span></div></a>
+        <a class="atty-card" href="#atty-chenpark"><div class="portrait">DC</div><div><h3>Daniel Chen-Park</h3><span class="role">Associate · Estate Planning</span></div></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="wrap quote">
+      <span class="quote-mark" aria-hidden="true">“</span>
+      <div>
+        <blockquote>They told us on the first call which claims were worth fighting and which weren't. That honesty saved us a year and a great deal of money.</blockquote>
+        <cite>Sample testimonial · CFO, regional manufacturing company</cite>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div>
+        <h2>Facing a deadline or a dispute?</h2>
+        <p>Tell us what happened. A partner will reply within one business day.</p>
+      </div>
+      <a class="btn" href="#contact">Start your consultation <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRACTICE AREAS ============ -->
+<section class="view" id="practice" aria-label="Practice areas">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / Practice Areas</div>
+      <span class="eyebrow">Practice areas</span>
+      <h1>What we handle</h1>
+      <p class="lede">Open any area to see typical matters and the partner who leads it.</p>
+    </div>
+    <div class="areas" style="margin-bottom:4.5rem">
+      <details open>
+        <summary><span class="sect">§ 1</span><h3>Commercial Litigation</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>We try cases. Most settle, but they settle on better terms when the other side knows we're ready for a jury. We handle matters in state and federal court and before AAA and JAMS arbitrators.</p>
+          <ul><li>Breach of contract and warranty</li><li>Shareholder and partnership disputes</li><li>Business torts and fraud</li><li>Appeals in the 7th Circuit</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-okafor">Adaeze Okafor</a> <a class="btn btn-ghost" href="#contact">Discuss a dispute</a></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="sect">§ 2</span><h3>Employment</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>We advise employers on the agreements and policies that prevent claims, and defend them when claims come. We also represent executives negotiating separations.</p>
+          <ul><li>Non-compete and non-solicit enforcement</li><li>Wage-and-hour class actions</li><li>Internal investigations</li><li>Executive employment agreements</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-reyes">Sofia Reyes</a> <a class="btn btn-ghost" href="#contact">Ask about employment</a></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="sect">§ 3</span><h3>Real Estate</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>From acquisition due diligence to zoning hearings and title disputes, we represent owners, developers and tenants across the Chicago metro area.</p>
+          <ul><li>Commercial purchases and sales</li><li>Office, retail and industrial leasing</li><li>Zoning and land-use approvals</li><li>Quiet-title and easement litigation</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-lindqvist">Martin Lindqvist</a> <a class="btn btn-ghost" href="#contact">Discuss a property</a></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="sect">§ 4</span><h3>Intellectual Property</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>We protect the assets that are hardest to replace: customer lists, formulas, source code and brands. We move quickly for temporary restraining orders when information walks out the door.</p>
+          <ul><li>Trade secret litigation under the DTSA</li><li>Trademark clearance and enforcement</li><li>Technology licensing</li><li>Domain and counterfeit takedowns</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-okafor">Adaeze Okafor</a> <a class="btn btn-ghost" href="#contact">Protect your IP</a></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="sect">§ 5</span><h3>Corporate &amp; M&amp;A</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>We act as outside general counsel for growing companies and handle buy-side and sell-side transactions up to $250M in enterprise value.</p>
+          <ul><li>Entity formation and governance</li><li>Seed through Series B financings</li><li>Asset and stock purchase agreements</li><li>Buy-sell and operating agreements</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-lindqvist">Martin Lindqvist</a> <a class="btn btn-ghost" href="#contact">Plan a transaction</a></div>
+        </div>
+      </details>
+      <details>
+        <summary><span class="sect">§ 6</span><h3>Estate Planning</h3><span class="plus" aria-hidden="true">+</span></summary>
+        <div class="area-body">
+          <p>We help families keep what they've built, with plans that cover the business, the house and the people who depend on both.</p>
+          <ul><li>Revocable and irrevocable trusts</li><li>Family business succession</li><li>Powers of attorney and healthcare directives</li><li>Probate and trust administration</li></ul>
+          <div class="lead">Led by <a class="textlink" href="#atty-chenpark">Daniel Chen-Park</a> <a class="btn btn-ghost" href="#contact">Start a plan</a></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ATTORNEYS ============ -->
+<section class="view" id="attorneys" aria-label="Attorneys">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / Attorneys</div>
+      <span class="eyebrow">Our attorneys</span>
+      <h1>The people on your matter</h1>
+      <p class="lede">Filter by practice, then open a profile.</p>
+    </div>
+    <div class="chips" role="radiogroup" aria-label="Filter attorneys by practice">
+      <input type="radio" name="af" id="af-all" checked><label for="af-all">All</label>
+      <input type="radio" name="af" id="af-lit"><label for="af-lit">Litigation</label>
+      <input type="radio" name="af" id="af-corp"><label for="af-corp">Corporate &amp; Real Estate</label>
+      <input type="radio" name="af" id="af-emp"><label for="af-emp">Employment</label>
+      <input type="radio" name="af" id="af-est"><label for="af-est">Estate Planning</label>
+    </div>
+    <div class="atty-grid" style="padding-bottom:4.5rem">
+      <a class="atty-card lit" href="#atty-okafor"><div class="portrait">AO</div><div><h3>Adaeze Okafor</h3><span class="role">Managing Partner · Litigation &amp; IP</span></div></a>
+      <a class="atty-card corp" href="#atty-lindqvist"><div class="portrait">ML</div><div><h3>Martin Lindqvist</h3><span class="role">Partner · Corporate &amp; Real Estate</span></div></a>
+      <a class="atty-card emp lit" href="#atty-reyes"><div class="portrait">SR</div><div><h3>Sofia Reyes</h3><span class="role">Partner · Employment</span></div></a>
+      <a class="atty-card est" href="#atty-chenpark"><div class="portrait">DC</div><div><h3>Daniel Chen-Park</h3><span class="role">Associate · Estate Planning</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROFILES ============ -->
+<section class="view profile" id="atty-okafor" aria-label="Adaeze Okafor">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / <a href="#attorneys">Attorneys</a> / Adaeze Okafor</div>
+      <span class="eyebrow">Managing Partner</span>
+      <h1>Adaeze Okafor</h1>
+    </div>
+    <div class="profile-grid">
+      <aside>
+        <div class="portrait">AO</div>
+        <dl class="facts">
+          <div><dt>Practices</dt><dd>Commercial Litigation, Intellectual Property</dd></div>
+          <div><dt>Bar admissions</dt><dd>Illinois, 2004 · N.D. Ill. · 7th Cir.</dd></div>
+          <div><dt>Education</dt><dd>J.D., Northwestern Pritzker, <i>cum laude</i></dd></div>
+          <div><dt>Direct line</dt><dd class="mono">(312) 555-0141</dd></div>
+        </dl>
+        <a class="btn btn-primary" href="#contact">Request a consultation</a>
+      </aside>
+      <div class="bio">
+        <p class="lede">Adaeze has tried more than 40 cases to verdict and leads the firm's trial group. Clients call her when a dispute threatens the core of their business.</p>
+        <p>She represents manufacturers, logistics companies and technology firms in contract, trade secret and shareholder disputes. Before joining Calder &amp; Wynn she clerked for a judge of the Northern District of Illinois.</p>
+        <h2>Representative matters</h2>
+        <ul>
+          <li>Won a $14.2M jury verdict for a freight carrier in a supply contract dispute (2026).</li>
+          <li>Obtained a TRO within 48 hours stopping a former executive from using a client's pricing data.</li>
+          <li>Defeated class certification in a consumer warranty action in federal court.</li>
+        </ul>
+        <p><a class="textlink" href="#attorneys">← Back to all attorneys</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view profile" id="atty-lindqvist" aria-label="Martin Lindqvist">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / <a href="#attorneys">Attorneys</a> / Martin Lindqvist</div>
+      <span class="eyebrow">Partner</span>
+      <h1>Martin Lindqvist</h1>
+    </div>
+    <div class="profile-grid">
+      <aside>
+        <div class="portrait">ML</div>
+        <dl class="facts">
+          <div><dt>Practices</dt><dd>Corporate &amp; M&amp;A, Real Estate</dd></div>
+          <div><dt>Bar admissions</dt><dd>Illinois, 2009 · Wisconsin, 2012</dd></div>
+          <div><dt>Education</dt><dd>J.D., University of Chicago · B.S., Accounting</dd></div>
+          <div><dt>Direct line</dt><dd class="mono">(312) 555-0143</dd></div>
+        </dl>
+        <a class="btn btn-primary" href="#contact">Request a consultation</a>
+      </aside>
+      <div class="bio">
+        <p class="lede">Martin is outside general counsel to more than 30 privately held companies and closes about a dozen acquisitions a year.</p>
+        <p>His accounting background means he reads the financial statements before the purchase agreement. He also leads the firm's commercial real estate work.</p>
+        <h2>Representative matters</h2>
+        <ul>
+          <li>Represented the founders in the $86M sale of a specialty food distributor.</li>
+          <li>Negotiated a 140,000 sq ft industrial lease with a 15-year term.</li>
+          <li>Structured a Series A financing for a healthcare software company.</li>
+        </ul>
+        <p><a class="textlink" href="#attorneys">← Back to all attorneys</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view profile" id="atty-reyes" aria-label="Sofia Reyes">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / <a href="#attorneys">Attorneys</a> / Sofia Reyes</div>
+      <span class="eyebrow">Partner</span>
+      <h1>Sofia Reyes</h1>
+    </div>
+    <div class="profile-grid">
+      <aside>
+        <div class="portrait">SR</div>
+        <dl class="facts">
+          <div><dt>Practices</dt><dd>Employment, Commercial Litigation</dd></div>
+          <div><dt>Bar admissions</dt><dd>Illinois, 2011 · Indiana, 2015</dd></div>
+          <div><dt>Languages</dt><dd>English, Spanish</dd></div>
+          <div><dt>Direct line</dt><dd class="mono">(312) 555-0146</dd></div>
+        </dl>
+        <a class="btn btn-primary" href="#contact">Request a consultation</a>
+      </aside>
+      <div class="bio">
+        <p class="lede">Sofia advises employers from hiring through separation and defends them in court, before the EEOC and in arbitration.</p>
+        <p>She is known for practical handbooks and agreements that hold up when tested. She also conducts independent workplace investigations for boards.</p>
+        <h2>Representative matters</h2>
+        <ul>
+          <li>Obtained summary judgment for a hospital group in a wage-and-hour collective action.</li>
+          <li>Enforced a non-solicit agreement against a departing sales team of eight.</li>
+          <li>Led a board-commissioned investigation into executive misconduct.</li>
+        </ul>
+        <p><a class="textlink" href="#attorneys">← Back to all attorneys</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view profile" id="atty-chenpark" aria-label="Daniel Chen-Park">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / <a href="#attorneys">Attorneys</a> / Daniel Chen-Park</div>
+      <span class="eyebrow">Associate</span>
+      <h1>Daniel Chen-Park</h1>
+    </div>
+    <div class="profile-grid">
+      <aside>
+        <div class="portrait">DC</div>
+        <dl class="facts">
+          <div><dt>Practices</dt><dd>Estate Planning, Probate</dd></div>
+          <div><dt>Bar admissions</dt><dd>Illinois, 2019</dd></div>
+          <div><dt>Education</dt><dd>J.D., Loyola Chicago · LL.M., Taxation</dd></div>
+          <div><dt>Direct line</dt><dd class="mono">(312) 555-0149</dd></div>
+        </dl>
+        <a class="btn btn-primary" href="#contact">Request a consultation</a>
+      </aside>
+      <div class="bio">
+        <p class="lede">Daniel builds estate plans for business owners and guides families through probate and trust administration.</p>
+        <p>His tax LL.M. lets him coordinate directly with clients' accountants on gifting strategies and business succession.</p>
+        <h2>Representative matters</h2>
+        <ul>
+          <li>Designed a three-generation succession plan for a family-owned construction company.</li>
+          <li>Administered a trust with real estate holdings in four states.</li>
+          <li>Resolved a contested probate matter through mediation in under six months.</li>
+        </ul>
+        <p><a class="textlink" href="#attorneys">← Back to all attorneys</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="view" id="results" aria-label="Case results">
+  <div class="wrap" style="padding-bottom:4.5rem">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / Case Results</div>
+      <span class="eyebrow">Case results</span>
+      <h1>Selected outcomes</h1>
+      <p class="lede">A sample of matters from recent years. Filter by practice.</p>
+    </div>
+    <div class="chips" role="radiogroup" aria-label="Filter results by practice">
+      <input type="radio" name="rf" id="rf-all" checked><label for="rf-all">All</label>
+      <input type="radio" name="rf" id="rf-lit"><label for="rf-lit">Commercial Litigation</label>
+      <input type="radio" name="rf" id="rf-emp"><label for="rf-emp">Employment</label>
+      <input type="radio" name="rf" id="rf-re"><label for="rf-re">Real Estate</label>
+      <input type="radio" name="rf" id="rf-ip"><label for="rf-ip">Intellectual Property</label>
+    </div>
+    <div class="results">
+      <article class="result lit">
+        <span class="tag">Litigation</span>
+        <div><h3>Meridian Freight Co. <i>v.</i> Halvorsen Logistics, Inc.</h3><p class="court">Cook County Circuit Court · <span class="mono">No. 2024-L-008812</span></p></div>
+        <div class="out"><b>$14.2M</b><span>Jury verdict, 2026</span></div>
+      </article>
+      <article class="result ip">
+        <span class="tag">IP</span>
+        <div><h3>Northgate Analytics <i>v.</i> Former VP of Sales</h3><p class="court">N.D. Ill. · <span class="mono">No. 1:25-cv-04417</span></p></div>
+        <div class="out"><b>TRO granted</b><span>Within 48 hours, 2025</span></div>
+      </article>
+      <article class="result emp">
+        <span class="tag">Employment</span>
+        <div><h3>In re Lakeshore Health Wage &amp; Hour Litigation</h3><p class="court">N.D. Ill. · <span class="mono">No. 1:23-cv-11902</span></p></div>
+        <div class="out"><b>Dismissed</b><span>Summary judgment, 2025</span></div>
+      </article>
+      <article class="result re">
+        <span class="tag">Real Estate</span>
+        <div><h3>Fulton Yard Partners · Zoning Map Amendment</h3><p class="court">Chicago Plan Commission · <span class="mono">Ord. 2025-0311</span></p></div>
+        <div class="out"><b>Approved</b><span>Mixed-use rezoning, 2025</span></div>
+      </article>
+      <article class="result lit">
+        <span class="tag">Litigation</span>
+        <div><h3>Okonjo Holdings LLC <i>v.</i> Brightwater Partners</h3><p class="court">AAA Commercial Arbitration · <span class="mono">Case 01-24-0007-1186</span></p></div>
+        <div class="out"><b>$3.8M</b><span>Arbitration award, 2024</span></div>
+      </article>
+      <article class="result ip">
+        <span class="tag">IP</span>
+        <div><h3>Harbor &amp; Pine Coffee · Trademark Opposition</h3><p class="court">TTAB · <span class="mono">Opp. No. 91284410</span></p></div>
+        <div class="out"><b>Sustained</b><span>Mark registered, 2024</span></div>
+      </article>
+    </div>
+    <p class="disclaimer">These are sample results for a fictional firm, shown for prototype purposes. On a live site this note would read: prior results do not guarantee a similar outcome. Every case is different and depends on its own facts and law.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="view" id="contact" aria-label="Request a consultation">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="crumbs"><a href="#home">Home</a> / Consultation</div>
+      <span class="eyebrow">Free 30-minute consultation</span>
+      <h1>Tell us what's going on</h1>
+      <p class="lede">A partner reviews every request. We'll run a conflict check, then contact you within one business day.</p>
+    </div>
+    <div class="contact-grid">
+      <form class="intake" id="intakeForm" novalidate>
+        <fieldset>
+          <legend><span>01</span>What kind of matter is it?</legend>
+          <div class="matter-types">
+            <input type="radio" name="matter" id="m-lit" value="Business dispute" checked><label for="m-lit">Business dispute<small>Contracts, partners</small></label>
+            <input type="radio" name="matter" id="m-emp" value="Employment"><label for="m-emp">Employment<small>Non-competes, claims</small></label>
+            <input type="radio" name="matter" id="m-re" value="Real estate"><label for="m-re">Real estate<small>Leases, zoning, title</small></label>
+            <input type="radio" name="matter" id="m-ip" value="Intellectual property"><label for="m-ip">Intellectual property<small>Trade secrets, marks</small></label>
+            <input type="radio" name="matter" id="m-corp" value="Corporate / M&amp;A"><label for="m-corp">Corporate / M&amp;A<small>Deals, governance</small></label>
+            <input type="radio" name="matter" id="m-est" value="Estate planning"><label for="m-est">Estate planning<small>Trusts, probate</small></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>02</span>About you</legend>
+          <div class="row2">
+            <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" required autocomplete="name" value="Jordan Ellis"></div>
+            <div class="field"><label for="f-company">Company <span class="opt">(optional)</span></label><input id="f-company" name="company" autocomplete="organization" value="Ellis Fabrication Inc."></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" value="jordan@example.com"></div>
+            <div class="field"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" value="(312) 555-0199"></div>
+          </div>
+          <div class="field">
+            <span class="label" id="pref-label">Preferred contact</span>
+            <div class="inline-radios" role="radiogroup" aria-labelledby="pref-label">
+              <label><input type="radio" name="pref" id="p-email" value="Email" checked> Email</label>
+              <label><input type="radio" name="pref" id="p-phone" value="Phone"> Phone</label>
+              <label><input type="radio" name="pref" id="p-video" value="Video call"> Video call</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span>03</span>The situation</legend>
+          <div class="row2">
+            <div class="field"><label for="f-other">Other party <span class="opt">(for conflict check)</span></label><input id="f-other" name="other" value="Brightline Steel Supply"></div>
+            <div class="field">
+              <label for="f-urgency">Any deadline?</label>
+              <select id="f-urgency" name="urgency">
+                <option>No deadline yet</option>
+                <option selected>Within 30 days</option>
+                <option>Within 7 days</option>
+                <option>I've been served with a lawsuit</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-desc">Brief description</label>
+            <textarea id="f-desc" name="desc" required>Our steel supplier stopped deliveries mid-contract and is demanding a 22% price increase. We have three customer orders due next month.</textarea>
+            <span class="hint">Keep it general. Please don't include confidential details until we've cleared conflicts.</span>
+          </div>
+          <label class="consent"><input type="checkbox" id="f-consent" name="consent" required checked> I understand that submitting this form does not create an attorney-client relationship, and that information I share is not confidential until an engagement is confirmed.</label>
+        </fieldset>
+
+        <div class="form-foot">
+          <small>Sample answers are pre-filled so you can click straight through.</small>
+          <button type="submit" class="btn btn-primary">Submit request <span class="arrow">→</span></button>
+        </div>
+        <p id="formError" class="hint" role="alert" style="color:#b3412e;font-size:.9rem" hidden>Fill in your name, a valid email and a short description, and tick the acknowledgement.</p>
+      </form>
+
+      <aside class="office">
+        <div class="office-card">
+          <h3>Chicago office</h3>
+          <p>220 W. Wacker Drive, Suite 1900<br>Chicago, IL 60606</p>
+          <p>Mon–Fri, 8:30 am – 6:00 pm CT</p>
+        </div>
+        <div class="office-card">
+          <h3>Call the intake line</h3>
+          <div class="copyable"><span class="mono" id="phoneText">(312) 555-0148</span><button type="button" class="copy-btn" data-copy="phoneText">Copy</button></div>
+          <p>Urgent matter after hours? Leave a message and the on-call partner will return it.</p>
+        </div>
+        <div class="office-card">
+          <h3>Email</h3>
+          <div class="copyable"><span class="mono" id="emailText">intake@calderwynn.example</span><button type="button" class="copy-btn" data-copy="emailText">Copy</button></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THANKS ============ -->
+<section class="view" id="thanks" aria-label="Request received">
+  <div class="wrap">
+    <div class="thanks">
+      <span class="eyebrow">Request received</span>
+      <h1>Thank you, <span id="t-name">Jordan</span>.</h1>
+      <p class="lede">In the live site, this request would go to the intake team. In this prototype nothing was sent.</p>
+      <div class="receipt">
+        <dl>
+          <dt>Reference</dt><dd class="mono" id="t-ref">CW-2026-0412</dd>
+          <dt>Matter type</dt><dd id="t-matter">Business dispute</dd>
+          <dt>Deadline</dt><dd id="t-urgency">Within 30 days</dd>
+          <dt>We'll reach you by</dt><dd id="t-pref">Email</dd>
+        </dl>
+      </div>
+      <h2 style="font-size:var(--step-2)">What happens next</h2>
+      <ol class="next-steps">
+        <li>We run a conflict check against the other party you named.</li>
+        <li>A partner reviews your summary and contacts you within one business day.</li>
+        <li>You get a 30-minute consultation at no charge.</li>
+      </ol>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#home">Back to home</a>
+        <a class="btn btn-ghost" href="#attorneys">Meet the attorneys</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="wordmark" href="#home"><b>Calder <i>&amp;</i> Wynn</b><small>LLP</small></a>
+      <p style="color:var(--muted);margin-top:.75rem;max-width:36ch">Business and trial counsel to companies and families since 1988.</p>
+    </div>
+    <div><h4>Firm</h4><ul><li><a href="#practice">Practice areas</a></li><li><a href="#attorneys">Attorneys</a></li><li><a href="#results">Case results</a></li></ul></div>
+    <div><h4>Clients</h4><ul><li><a href="#contact">Free consultation</a></li><li><a href="#contact">Office &amp; hours</a></li></ul></div>
+    <div><h4>Visit</h4><ul><li>220 W. Wacker Dr., Ste 1900</li><li>Chicago, IL 60606</li></ul></div>
+    <div class="legal">
+      <p><strong>Attorney advertising.</strong> This website is for general information and is not legal advice. Contacting the firm does not create an attorney-client relationship.</p>
+      <p>© 2026 Calder &amp; Wynn LLP. Fictional firm for prototype use.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById('navToggle');
+  window.addEventListener('hashchange', function () {
+    toggle.checked = false;
+    window.scrollTo({ top: 0 });
+  });
+
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.dataset.copy);
+      var text = el.textContent;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected';
+      };
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+
+  var form = document.getElementById('intakeForm');
+  var err = document.getElementById('formError');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { err.hidden = false; form.reportValidity && form.reportValidity(); return; }
+    err.hidden = true;
+    var d = new FormData(form);
+    var set = function (id, v) { document.getElementById(id).textContent = v; };
+    set('t-name', (d.get('name') || '').trim().split(' ')[0] || 'there');
+    set('t-matter', d.get('matter'));
+    set('t-urgency', d.get('urgency'));
+    set('t-pref', d.get('pref'));
+    set('t-ref', 'CW-2026-' + String(Math.floor(1000 + Math.random() * 9000)));
+    location.hash = 'thanks';
+  });
+})();
+</script>
+</body>
+</html>
